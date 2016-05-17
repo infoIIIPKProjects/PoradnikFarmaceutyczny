@@ -1,0 +1,31 @@
+.menu {
+    width: auto;
+    height: 59px;
+    background: linear-gradient(to bottom, #555555 0%, #222222 100%);
+    border-bottom: 3px solid #0f71ba;
+}
+
+.menu .items {
+    list-style: none;
+    position: relative;
+    font-family: Capriola, Helvetica, sans-serif;
+}
+
+.menu .items .item {
+    float: right;
+    display: inline-block;
+    top: 20px;
+    position: relative;
+
+}
+
+.menu .items .item :hover {
+    background: linear-gradient(to bottom, #3fa4f0 0%, #0f71ba 100%);
+    border-radius: 15px 50px 30px;
+}
+
+.menu .items .item a {
+    padding: 24px 30px 20px 30px;
+    color: #eeeeee;
+    text-decoration: none;
+}

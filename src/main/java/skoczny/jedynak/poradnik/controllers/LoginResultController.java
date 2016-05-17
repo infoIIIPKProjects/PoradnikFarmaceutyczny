@@ -66,6 +66,6 @@ public class LoginResultController {
 //        }
 //        user.setChorobas(chorobaList);
         service.addUserToDB(user);
-        return "hello";
+        return "mainPage";
     }
 }

@@ -1,0 +1,35 @@
+
+
+.container .title {
+    text-align: center;
+    font-family: Capriola, Helvetica, sans-serif;
+    font-size: 45px;
+    top: 20px;
+    position: relative;
+}
+
+.page-wrapper {
+    height: 100%;
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.container .images {
+    text-align: center;
+    top: 50px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.container .images .image-container {
+    display: inline-block;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+/*.container .images .image-container .img :hover {*/
+/*. -webkit-transform: scale3d(1.2, 1.2, 1);*/
+    /*transform: scale3d(1.2, 1.2, 1);*/
+/*}*/
+
