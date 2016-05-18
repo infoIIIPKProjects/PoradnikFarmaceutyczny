@@ -13,7 +13,6 @@
                     <span>Logowanie</span>
                 </a>
             </li>
-            <%--<li class='rightside'><a href="/admin/welcomePage.html"><span>Logowanie admin</span></a></li>--%>
             <li class="item">
                 <a href="/registerPage.html">
                     <span>Rejestracja</span></a>
