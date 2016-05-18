@@ -4,7 +4,6 @@
     text-align: center;
     font-family: doctor;
     font-size: 45px;
-    top: 20px;
     position: relative;
 }
 
@@ -27,7 +26,6 @@
 
 .container .images {
     text-align: center;
-    top: 50px;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
