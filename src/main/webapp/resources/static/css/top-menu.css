@@ -9,14 +9,14 @@
     list-style: none;
     position: relative;
     font-family: Capriola, Helvetica, sans-serif;
+    height: 100%
 }
 
 .menu .items .item {
     float: right;
     display: inline-block;
-    top: 20px;
     position: relative;
-
+    line-height: 60px;
 }
 
 .menu .items .item:hover {

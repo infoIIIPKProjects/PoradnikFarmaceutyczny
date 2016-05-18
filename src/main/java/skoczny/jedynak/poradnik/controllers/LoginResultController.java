@@ -49,7 +49,7 @@ public class LoginResultController {
     @RequestMapping(value = "registerPage.html", method = RequestMethod.GET)
     public ModelAndView getUserRegisterPage() {
         User userForm = new User();
-        ModelAndView model = new ModelAndView("registeration");
+        ModelAndView model = new ModelAndView("registerPage");
         model.addObject("userForm", userForm);
 
         return model;

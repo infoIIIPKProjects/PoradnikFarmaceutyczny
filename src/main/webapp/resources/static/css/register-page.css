@@ -1,11 +1,11 @@
-.login-page-wrapper{
+.register-page-wrapper{
     height: 100%;
     width: 100%;
     background-color: lightgrey;
     position:relative;
 }
 
-.login-page-wrapper .title {
+.register-page-wrapper .title {
     text-align: center;
     font-family: doctor;
     font-size: 36px;
@@ -13,7 +13,7 @@
     color:white;
 }
 
-.login-form{
+.register-form{
     position: absolute;
     margin:auto;
     top:0;
@@ -23,7 +23,8 @@
     width: 50%;
     height: 50%
 }
-.login-form form {
+
+.register-form form {
     position: relative;
     width: 250px;
     margin: 0 auto;
@@ -36,7 +37,7 @@
     border-right-color: rgba(60,60,60,.4);
 }
 
-.login-form input[type="submit"] {
+.register-form input[type="submit"] {
     width: 248px;
     color: #0f71ba;
     letter-spacing: .05em;
@@ -45,21 +46,10 @@
     text-transform: uppercase;
 }
 
-.login-form input[id="name"], input[id="password"] {
+.register-form input[id="name"], input[id="password"] {
     width: 248px;
     color: #0f71ba;
     letter-spacing: .05em;
-}
-
-.error{
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70%;
-    width: 129px;
 }
 
 

@@ -8,8 +8,8 @@
 </head>
 <body>
 <div class="login-page-wrapper">
-<div class="menu"/>
-
+    <div class="menu"/>
+    <div class="title">LOGOWANIE DO SYSTEMU</div>
     <div class="error">
         <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
             Zły login lub hasło.<br>
