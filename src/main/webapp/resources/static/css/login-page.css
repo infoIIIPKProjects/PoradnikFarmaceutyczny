@@ -1,0 +1,54 @@
+.login-page-wrapper{
+    height: 100%;
+    width: 100%;
+    background-color: lightgrey;
+    position:relative;
+}
+
+.login-form{
+    position: absolute;
+    margin:auto;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    width: 50%;
+    height: 50%
+}
+.login-form form {
+    position: relative;
+    width: 250px;
+    margin: 0 auto;
+    background: rgba(130,130,130,.3);
+    padding: 20px 22px;
+    border: 1px solid;
+    border-top-color: rgba(255,255,255,.4);
+    border-left-color: rgba(255,255,255,.4);
+    border-bottom-color: rgba(60,60,60,.4);
+    border-right-color: rgba(60,60,60,.4);
+}
+
+.login-form input[type="submit"] {
+    width: 248px;
+    color: #0f71ba;
+    letter-spacing: .05em;
+    background: #094673 ;
+    cursor: pointer;
+}
+
+.login-form input[id="name"], input[id="password"] {
+    width: 248px;
+    color: #0f71ba;
+    letter-spacing: .05em;
+}
+
+.error{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    width: 129px;
+}
