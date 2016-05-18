@@ -21,11 +21,11 @@
         </ul>
     </div>
 <div class="container">
-    <div class="title">Poradnik Farmaceutyczny</div>
+    <div class="title">PORADNIK FARMACEUTYCZNY</div>
 
     <div class="images">
         <div class="image-container">
-            <h3>Znajdz szybko lek</h3>
+            <h3>ZNAJDZ LEK</h3>
             <img src="/resources/static/images/leki.png">
         </div>
         <div class="image-container">
@@ -33,7 +33,7 @@
             <img src="/resources/static/images/farmaceuta.png">
         </div>
         <div class="image-container">
-            <h3>Sprawdz statystyki</h3>
+            <h3>SPRAWDZ STATYSTYKI</h3>
             <img src="/resources/static/images/samplechart1.png">
         </div>
     </div>

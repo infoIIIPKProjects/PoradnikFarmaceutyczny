@@ -19,7 +19,7 @@
 
 }
 
-.menu .items .item :hover {
+.menu .items .item:hover {
     background: linear-gradient(to bottom, #3fa4f0 0%, #0f71ba 100%);
     border-radius: 15px 50px 30px;
 }

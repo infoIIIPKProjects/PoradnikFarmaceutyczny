@@ -2,7 +2,7 @@
 
 .container .title {
     text-align: center;
-    font-family: Capriola, Helvetica, sans-serif;
+    font-family: doctor;
     font-size: 45px;
     top: 20px;
     position: relative;
@@ -12,6 +12,17 @@
     height: 100%;
     width: 100%;
     background-color: lightgrey;
+    position:relative;
+}
+
+.container{
+    height: 75%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .container .images {
@@ -20,6 +31,7 @@
     position: relative;
     white-space: nowrap;
     overflow: hidden;
+    height: 100%;
 }
 
 .container .images .image-container {
@@ -28,8 +40,16 @@
     padding-right: 60px;
 }
 
-/*.container .images .image-container .img :hover {*/
-/*. -webkit-transform: scale3d(1.2, 1.2, 1);*/
-    /*transform: scale3d(1.2, 1.2, 1);*/
-/*}*/
+.container .images .image-container h3 {
+    font-family: doctor;
+}
+
+.container .images .image-container:hover {
+    transform: scale(1.2);
+}
+
+@font-face {
+    font-family: 'doctor';
+    src: url('/resources/static/fonts/Doctor.ttf');
+}
 
