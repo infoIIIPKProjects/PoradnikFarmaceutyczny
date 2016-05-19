@@ -173,7 +173,7 @@ public class DBLoader {
         kategorie.add(stanyNagle);
         KategoriaChoroby krazenia = addKategoriaChorobyToDB("Choroby ukladu krazenia?");
         kategorie.add(krazenia);
-        KategoriaChoroby gospodarki = addKategoriaChorobyToDB("Zaburzenia gospodarki wodno-elektrolitowej i rownowagi kwasowo-zasadowej");
+        KategoriaChoroby gospodarki = addKategoriaChorobyToDB("Zaburzenia gospodarki elektrolitowej");
         kategorie.add(gospodarki);
         KategoriaChoroby psychiczne = addKategoriaChorobyToDB("Zaburzenia psychiczne");
         kategorie.add(psychiczne);
@@ -181,7 +181,7 @@ public class DBLoader {
         kategorie.add(rozwoju);
         KategoriaChoroby odpornosciowe = addKategoriaChorobyToDB("Zaburzenia ukladu odpornosciowego");
         kategorie.add(odpornosciowe);
-        KategoriaChoroby metabolcizne = addKategoriaChorobyToDB("Zaburzenia wydzielania wewnetrznego, stanu odzywienia i przemiany metabolicznej");
+        KategoriaChoroby metabolcizne = addKategoriaChorobyToDB("Zaburzenia wydzielania wewnetrznego");
         kategorie.add(metabolcizne);
         KategoriaChoroby zakazne = addKategoriaChorobyToDB("Choroby zakazne");
         kategorie.add(zakazne);

@@ -13,10 +13,13 @@
 }
 
 .menu .items .item {
-    float: right;
     display: inline-block;
     position: relative;
     line-height: 60px;
+}
+
+.menu .items .item.right {
+    float: right;
 }
 
 .menu .items .item:hover {

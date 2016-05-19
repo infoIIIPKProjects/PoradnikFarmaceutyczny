@@ -115,7 +115,7 @@ public class PoradnikFarmaceutycznyController {
         return model;
     }
 
-    @RequestMapping(value = "/user/addchoroba.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/addChorobaPage.html", method = RequestMethod.GET)
     public String addChoroba(Model model, Principal principal) {
 
         User user = service.getUserByUserName(principal.getName());
@@ -125,7 +125,7 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("kategoriaChoroby", service.listCategories());
         model.addAttribute("opis", "");
 
-        return "addchoroba";
+        return "addChorobaPage";
     }
 
     @RequestMapping(value = "/user/addlek.html", method = RequestMethod.GET)

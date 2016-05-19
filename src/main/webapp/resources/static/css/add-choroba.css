@@ -1,0 +1,96 @@
+.page-wrapper{
+    height: 100%;
+    width: 100%;
+    background-color: lightgrey;
+    position:relative;
+}
+
+.form-wrapper{
+    position: absolute;
+    margin:auto;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    width: 50%;
+    height: 50%
+}
+
+.form-wrapper form {
+    position: relative;
+    width: 700px;
+    height: 400px;
+    margin: 0 auto;
+    background: rgba(130,130,130,.3);
+    padding: 20px 22px;
+    border: 1px solid;
+    border-top-color: rgba(255,255,255,.4);
+    border-left-color: rgba(255,255,255,.4);
+    border-bottom-color: rgba(60,60,60,.4);
+    border-right-color: rgba(60,60,60,.4);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.form-wrapper .item{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-bottom: 2px solid #CCCC99;
+}
+
+.form-wrapper .item div{
+    font-family: doctor;
+    font-size: 25px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.form-wrapper .item input{
+    transition: all 0.3s;
+    color:#003366;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.form-wrapper .item input:hover{
+    background-color: #CCCC9A;
+}
+
+.form-wrapper .item select{
+    transition: all 0.3s;
+    color:#003366;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.form-wrapper .item select:hover{
+    background-color: #CCCC9A;
+}
+
+.form-wrapper .button{
+    background-color: #CCCC9A;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.form-wrapper .button button{
+    font-family: doctor;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.form-wrapper .button button:hover{
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+}
+
+@font-face {
+    font-family: 'doctor';
+    src: url('/resources/static/fonts/Doctor.ttf');
+}
+

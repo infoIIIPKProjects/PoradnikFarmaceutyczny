@@ -8,12 +8,12 @@
 <div class="page-wrapper">
     <div class="menu">
         <ul class="items">
-            <li class="item">
+            <li class="item right">
                 <a href="/user/welcomePage.html">
                     <span>Logowanie</span>
                 </a>
             </li>
-            <li class="item">
+            <li class="item right">
                 <a href="/registerPage.html">
                     <span>Rejestracja</span></a>
             </li>
