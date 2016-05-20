@@ -256,7 +256,7 @@ public class PoradnikFarmaceutycznyController {
         }
     }
 
-    @RequestMapping(value = "/user/viewreport{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/viewReportPage{id}", method = RequestMethod.GET)
     public String viewUserReport(Model model) {
 
         List<Choroba> kategoriaChorobies = service.listChoroba();
@@ -278,7 +278,7 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("dostepnoscObraz", dostepnoscObraz);
         model.addAttribute("chorobyLekiObraz", chorobyLekiObraz);
         model.addAttribute("cenyLekowObraz", cenyLekowObraz);
-        return "viewreport";
+        return "viewReportPage";
     }
 
     private Map<String, Double> prepareDataForChorobyLeki(Map<Lek, List<Choroba>> listLekiZchorobami) {

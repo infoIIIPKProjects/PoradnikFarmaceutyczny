@@ -29,7 +29,7 @@
                     <span>Dodaj lek</span></a>
             </li>
             <li class="item">
-                <a href='/user/viewreport${user.id}'>
+                <a href='/user/viewReportPage${user.id}'>
                     <span>Pokaz wykresy</span></a>
             </li>
             <li class="item right">

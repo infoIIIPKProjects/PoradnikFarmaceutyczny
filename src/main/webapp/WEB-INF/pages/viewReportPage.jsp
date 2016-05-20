@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/resources/static/css/add-choroba.css">
 </head>
 <body>
-
 <div class="page-wrapper">
     <div class="menu">
         <ul class="items">
@@ -28,7 +27,7 @@
                 <a href="/user/addLekPage.html">
                     <span>Dodaj lek</span></a>
             </li>
-            <li class="item">
+            <li class="item selected">
                 <a href='/user/viewReportPage${user.id}'>
                     <span>Pokaz wykresy</span></a>
             </li>
@@ -38,34 +37,11 @@
             </li>
         </ul>
     </div>
-    <div class="form-wrapper">
-        <form method="post" action="/user/aftereditingLek.html">
-            <input type="hidden" name="lek_id" value="${lek_id}">
-            <div class="item">
-                <div>Nazwa leku</div>
-                <input type="text" value="${lek.lekName}" name="nazwa"/>
-            </div>
-            <div class="item">
-                <div>Cena</div>
-                <input type="text" value="${lek.cena}" name="cena"/>
-            </div>
-            <div class="item">
-                <div>Dostepnosc</div>
-                <select name="dostepnosc">
-                    <option value="tak">tak</option>
-                    <option value="nie">nie</option>
-                </select>
-            </div>
-            <div class="item">
-                <div>Choroba:</div>
-               <div>${lek.chorobas}</div>
-            </div>
-            <div class="button">
-                <button>Edytuj
-                    <input type="submit" hidden/>
-                </button>
-            </div>
-        </form>
+    <div class="images-wrapper">
+        <img src="${kategorieObraz}"/>
+        <img src="${chorobyLekiObraz}"/>
+        <img src="${dostepnoscObraz}"/>
+        <img src="${cenyLekowObraz}"/>
     </div>
 </div>
 </body>
