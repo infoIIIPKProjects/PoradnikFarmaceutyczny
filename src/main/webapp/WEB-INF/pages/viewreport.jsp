@@ -43,7 +43,7 @@
         <li><a href="/user/welcomePage.html"><span>Lista chorób</span></a></li>
         <li><a href="/user/userWelcomePage2.html"><span>Lista leków</span></a></li>
         <li class='active'><a href="/user/addChorobaPage.html"><span>Dodaj chorobe</span></a></li>
-        <li class='active'><a href="/user/addlek.html"><span>Dodaj lek</span></a></li>
+        <li class='active'><a href="/user/addLekPage.html"><span>Dodaj lek</span></a></li>
         <li><a href='/user/viewreport${user.id}'><span>Pokaz wykresy</span></a></li>
         <li class='rightside'><a href="<c:url value="/j_spring_security_logout" />"><span>Logout</span></a></li>
     </ul>

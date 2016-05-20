@@ -150,4 +150,10 @@ public class PoradnikFarmaceutycznyDAOImpl implements PoradnikFarmaceutycznyDAO 
         List<Object[]> categories = query.list();
         return categories;
     }
+
+    @Override
+    public boolean isInSession(Choroba choroba){
+        Session session = this.sessionFactory.getCurrentSession();
+        return session.contains(choroba.getId());
+    }
 }

@@ -43,7 +43,7 @@
         <li><a href="/user/welcomePage.html"><span>Lista chorób</span></a></li>
         <li><a href="/user/userWelcomePage2.html"><span>Lista leków</span></a></li>
         <li class='active'><a href="/user/addChorobaPage.html"><span>Dodaj chorobe</span></a></li>
-        <li class='active'><a href="/user/addlek.html"><span>Dodaj lek</span></a></li>
+        <li class='active'><a href="/user/addLekPage.html"><span>Dodaj lek</span></a></li>
         <li><a href='/user/viewreport${user.id}'><span>Pokaz wykresy</span></a></li>
         <li class='rightside'><a href="<c:url value="/j_spring_security_logout" />"><span>Wyloguj</span></a></li>
     </ul>
@@ -73,7 +73,7 @@
                     <td>${choroba.description}</td>
                     <td>${choroba.lek}</td>
                     <td><a href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usun</a></td>
-                    <td><a href="<c:url value="/user/editchoroba${choroba.id}"/>">edytuj</a></td>
+                    <td><a href="<c:url value="/user/editChorobaPage${choroba.id}"/>">edytuj</a></td>
                 </tr>
             </core:forEach>
         </tbody>

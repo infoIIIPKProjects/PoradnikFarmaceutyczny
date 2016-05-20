@@ -88,4 +88,34 @@ public class Choroba {
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Choroba choroba = (Choroba) o;
+
+        if (id != choroba.id) return false;
+        if (Float.compare(choroba.amount, amount) != 0) return false;
+        if (user != null ? !user.equals(choroba.user) : choroba.user != null) return false;
+        if (lek != null ? !lek.equals(choroba.lek) : choroba.lek != null) return false;
+        if (kategoriaChoroby != null ? !kategoriaChoroby.equals(choroba.kategoriaChoroby) : choroba.kategoriaChoroby != null)
+            return false;
+        if (description != null ? !description.equals(choroba.description) : choroba.description != null) return false;
+        return nazwa != null ? nazwa.equals(choroba.nazwa) : choroba.nazwa == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (lek != null ? lek.hashCode() : 0);
+        result = 31 * result + (kategoriaChoroby != null ? kategoriaChoroby.hashCode() : 0);
+        result = 31 * result + (amount != +0.0f ? Float.floatToIntBits(amount) : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (nazwa != null ? nazwa.hashCode() : 0);
+        return result;
+    }
 }

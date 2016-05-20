@@ -17,9 +17,7 @@ import skoczny.jedynak.poradnik.model.User;
 import skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyService;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class PoradnikFarmaceutycznyController {
@@ -65,10 +63,10 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("choroby", service.listLekiZchorobami().get(lek));
         model.addAttribute("user", user);
 
-        return "editlek";
+        return "editLekPage";
     }
 
-    @RequestMapping(value = {"/user/editchoroba{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/user/editChorobaPage{id}"}, method = RequestMethod.GET)
     public String updateChoroba(@PathVariable String id, Model model, Principal principal) {
         Choroba choroba = service.getChorobaID(Integer.parseInt(id));
 
@@ -81,7 +79,7 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("kategoriaChoroby", service.listCategories());
         model.addAttribute("opis", choroba.getDescription());
 
-        return "editchoroba";
+        return "editChorobaPage";
     }
 
     @RequestMapping(value = "/user/aftereditingLek", method = RequestMethod.POST)
@@ -128,7 +126,7 @@ public class PoradnikFarmaceutycznyController {
         return "addChorobaPage";
     }
 
-    @RequestMapping(value = "/user/addlek.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/addLekPage.html", method = RequestMethod.GET)
     public String addLek(Model model, Principal principal) {
 
         User user = service.getUserByUserName(principal.getName());
@@ -138,7 +136,7 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("choroba", service.listChoroba());
         model.addAttribute("user", user);
 
-        return "addlek";
+        return "addLekPage";
     }
 
 
@@ -235,7 +233,8 @@ public class PoradnikFarmaceutycznyController {
 
         // lek
         Lek lek = service.getLekById(Integer.parseInt(lekId));
-        item.setLek(lek);
+
+        resolveNoDataChange(item, lek);
 
         // description
         item.setDescription(description);
@@ -245,6 +244,16 @@ public class PoradnikFarmaceutycznyController {
         ModelAndView model = new ModelAndView("redirect:welcomePage.html");
 
         return model;
+    }
+
+    private void resolveNoDataChange(Choroba item, Lek lek) {
+        Set<String> names = new HashSet<>();
+        for (Choroba choroba : lek.getChorobas()) {
+            names.add(choroba.getNazwa());
+        }
+        if (!names.contains(item.getNazwa())) {
+            item.setLek(lek);
+        }
     }
 
     @RequestMapping(value = "/user/viewreport{id}", method = RequestMethod.GET)

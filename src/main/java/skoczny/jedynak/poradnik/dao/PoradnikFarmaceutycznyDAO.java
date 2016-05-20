@@ -38,5 +38,6 @@ public interface PoradnikFarmaceutycznyDAO {
 
     void addUserToDB(User user);
 
+    boolean isInSession(Choroba choroba);
 }
 

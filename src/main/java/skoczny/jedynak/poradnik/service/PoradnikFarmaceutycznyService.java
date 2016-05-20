@@ -37,4 +37,6 @@ public interface PoradnikFarmaceutycznyService {
      List<Object[]> getUserKategoriaChorobyByDate(int id, String fromDate, String toDate);
 
     void addUserToDB(User user);
+
+    boolean isInSession(Choroba choroba);
 }

@@ -20,7 +20,7 @@
                 <a href="/user/userWelcomePage2.html">
                     <span>Lista leków</span></a>
             </li>
-            <li class="item selected">
+            <li class="item">
                 <a href="/user/addChorobaPage.html">
                     <span>Dodaj chorobe</span></a>
             </li>
@@ -39,7 +39,8 @@
         </ul>
     </div>
     <div class="form-wrapper">
-        <form method="post" action="/user/afteraddingItem.html">
+        <form method="post" action="/user/aftereditingItem.html">
+            <input type="hidden" name="choroba_id" value="${choroba_id}">
             <div class="item">
                 <div>Nazwa choroby</div>
                 <input type="text" value="${choroba.nazwa}" name="nazwa"/>
@@ -47,8 +48,12 @@
             <div class="item">
                 <div>Wybierz kategorie choroby:</div>
                 <select name="kategoriaChoroby">
+                    <option value="${choroba.kategoriaChoroby.id}"
+                            selected>${choroba.kategoriaChoroby}</option>
                     <c:forEach var="category" items="${kategoriaChoroby}">
-                        <option value="${category.id}">${category}</option>
+                        <c:if test="${category.id ne choroba.kategoriaChoroby.id}">
+                            <option value="${category.id}">${category}</option>
+                        </c:if>
                     </c:forEach>
                 </select>
             </div>
@@ -59,13 +64,16 @@
             <div class="item">
                 <div>Lek:</div>
                 <select name="lek">
+                    <option value="${choroba.lek.id}" selected>${choroba.lek}</option>
                     <c:forEach var="lek" items="${lek}">
-                        <option value="${lek.id}">${lek}</option>
+                        <c:if test="${lek.id ne choroba.lek.id}">
+                            <option value="${lek.id}">${lek}</option>
+                        </c:if>
                     </c:forEach>
                 </select>
             </div>
             <div class="button">
-                <button>Dodaj
+                <button>Edytuj
                     <input type="submit" hidden/>
                 </button>
             </div>

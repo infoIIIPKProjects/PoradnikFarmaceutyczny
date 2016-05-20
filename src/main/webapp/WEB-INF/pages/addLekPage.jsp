@@ -20,11 +20,11 @@
                 <a href="/user/userWelcomePage2.html">
                     <span>Lista leków</span></a>
             </li>
-            <li class="item selected">
+            <li class="item">
                 <a href="/user/addChorobaPage.html">
                     <span>Dodaj chorobe</span></a>
             </li>
-            <li class="item">
+            <li class="item selected">
                 <a href="/user/addLekPage.html">
                     <span>Dodaj lek</span></a>
             </li>
@@ -39,28 +39,27 @@
         </ul>
     </div>
     <div class="form-wrapper">
-        <form method="post" action="/user/afteraddingItem.html">
+        <form method="post" action="/user/afteraddingLek.html">
             <div class="item">
-                <div>Nazwa choroby</div>
-                <input type="text" value="${choroba.nazwa}" name="nazwa"/>
+                <div>Nazwa leku</div>
+                <input type="text" value="${lek.lekName}" name="nazwa"/>
             </div>
             <div class="item">
-                <div>Wybierz kategorie choroby:</div>
-                <select name="kategoriaChoroby">
-                    <c:forEach var="category" items="${kategoriaChoroby}">
-                        <option value="${category.id}">${category}</option>
-                    </c:forEach>
+                <div>Cena</div>
+                <input type="text" value="${lek.cena}" name="cena"/>
+            </div>
+            <div class="item">
+                <div>Dostepnosc</div>
+                <select name="dostepnosc">
+                    <option value="tak">tak</option>
+                    <option value="nie">nie</option>
                 </select>
             </div>
             <div class="item">
-                <div>Opis choroby:</div>
-                <input type="text" name="description" value="${choroba.description}"/>
-            </div>
-            <div class="item">
-                <div>Lek:</div>
-                <select name="lek">
-                    <c:forEach var="lek" items="${lek}">
-                        <option value="${lek.id}">${lek}</option>
+                <div>Choroba:</div>
+                <select name="choroba">
+                    <c:forEach var="choroba" items="${choroba}">
+                        <option value="${choroba.id}">${choroba}</option>
                     </c:forEach>
                 </select>
             </div>
