@@ -7,16 +7,20 @@
 </head>
 <body>
 <div class="register-page-wrapper">
-    <div class="menu"/>
-    <div class="title">REJESTRACJA DO SYSTEMU</div>
-    <div class="register-form">
-            <form action="register" method="post">
-                <input id="name" name="name" type="text" placeholder="name"/><br>
-                <input id="password" name="password" type="password" placeholder="password"/><br>
-                <input type="submit" value="Zarejestruj"/>
-            </form>
+    <div class="menu">
+        <div class="title">REJESTRACJA DO SYSTEMU</div>
     </div>
+
+    <div class="register-form">
+        <form action="register" method="post">
+            <input id="name" name="name" type="text" placeholder="name"/><br>
+            <input id="password" name="password" type="password" placeholder="password"/><br>
+            <input type="submit" value="Zarejestruj"/>
+        </form>
+    </div>
+    <div id="greeting" class="greeting"></div>
 </div>
 
 </body>
+<script src="/resources/static/js/date.js"></script>
 </html>

@@ -37,3 +37,15 @@
     background: linear-gradient(to bottom, #3fa4f0 0%, #0f71ba 100%);
     border-radius: 15px 50px 30px;
 }
+
+.greeting{
+    font-family: doctor;
+    font-size: 25px;
+    position: fixed;
+    bottom: 0;
+}
+
+@font-face {
+    font-family: 'doctor';
+    src: url('/resources/static/fonts/Doctor.ttf');
+}

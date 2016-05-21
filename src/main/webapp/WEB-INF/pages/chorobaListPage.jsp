@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="page-wrapper">
-    <div class="menu">
+    <div id="menu" class="menu">
         <ul class="items">
             <li class="item selected">
                 <a href="/user/chorobaListPage.html">
@@ -49,7 +49,7 @@
         </ul>
     </div>
 
-    <div class="welcome">Witaj ${user.name}</div>
+    <div id = "welcome" class="welcome">Witaj ${user.name}</div>
     <div align="center" class="table-wrapper">
         <div class="title">Choroby</div>
         <table id="chorobaList">
@@ -75,7 +75,9 @@
             </tbody>
         </table>
     </div>
+    <div id="greeting" class="greeting"></div>
 </div>
 </body>
+<script src="/resources/static/js/date.js"></script>
 </html>
 

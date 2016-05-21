@@ -71,6 +71,8 @@
             </div>
         </form>
     </div>
+    <div id="greeting" class="greeting"></div>
 </div>
 </body>
+<script src="/resources/static/js/date.js"></script>
 </html>

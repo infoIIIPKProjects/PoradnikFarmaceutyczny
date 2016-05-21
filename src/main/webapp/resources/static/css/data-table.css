@@ -7,7 +7,6 @@
 
 .table-wrapper{
     position: absolute;
-    height: 100%;
     width: 100%;
     background-color: lightgray;
 }
@@ -70,10 +69,6 @@ a.paginate_button {
     font-weight: bold;
 }
 
-.table-wrapper{
-    position: relative;
-}
-
 div#chorobaList_filter label {
     font-size: 0.000000000000001em;
 }
@@ -102,6 +97,10 @@ a#chorobaList_previous {
 
 a#chorobaList_next {
     display: none;
+}
+
+.dataTables_wrapper {
+    background-color: lightgray;
 }
 
 

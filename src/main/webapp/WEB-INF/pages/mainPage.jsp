@@ -19,24 +19,26 @@
             </li>
         </ul>
     </div>
-<div class="container">
-    <div class="title">PORADNIK FARMACEUTYCZNY</div>
+    <div class="container">
+        <div class="title">PORADNIK FARMACEUTYCZNY</div>
 
-    <div class="images">
-        <div class="image-container">
-            <h3>ZNAJDZ LEK</h3>
-            <img src="/resources/static/images/leki.png">
+        <div class="images">
+            <div class="image-container">
+                <h3>ZNAJDZ LEK</h3>
+                <img src="/resources/static/images/leki.png">
+            </div>
+            <div class="image-container">
+                <h3></h3>
+                <img src="/resources/static/images/farmaceuta.png">
+            </div>
+            <div class="image-container">
+                <h3>SPRAWDZ STATYSTYKI</h3>
+                <img src="/resources/static/images/samplechart1.png">
+            </div>
         </div>
-        <div class="image-container">
-            <h3></h3>
-            <img src="/resources/static/images/farmaceuta.png">
-        </div>
-        <div class="image-container">
-            <h3>SPRAWDZ STATYSTYKI</h3>
-            <img src="/resources/static/images/samplechart1.png">
-        </div>
+        <div id="greeting" class="greeting"></div>
     </div>
 </div>
-</div>
 </body>
+<script src="/resources/static/js/date.js"></script>
 </html>
