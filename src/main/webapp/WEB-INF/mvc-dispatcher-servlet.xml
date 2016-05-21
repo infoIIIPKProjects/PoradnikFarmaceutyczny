@@ -83,7 +83,7 @@
         <security:intercept-url pattern="/user/*" access="hasRole('ROLE_USER')"/>
         <security:form-login
                 login-page="/loginPage"
-                default-target-url="/user/userWelcomePage"
+                default-target-url="/user/chorobaListPage"
                 authentication-failure-url="/loginPage"
                 username-parameter="name"
                 password-parameter="password"

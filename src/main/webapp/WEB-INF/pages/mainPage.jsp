@@ -9,7 +9,7 @@
     <div class="menu">
         <ul class="items">
             <li class="item right">
-                <a href="/user/welcomePage.html">
+                <a href="/user/chorobaListPage.html">
                     <span>Logowanie</span>
                 </a>
             </li>

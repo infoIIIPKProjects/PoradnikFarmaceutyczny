@@ -10,7 +10,7 @@
     <div class="menu"/>
     <div class="title">REJESTRACJA DO SYSTEMU</div>
     <div class="register-form">
-            <form action="register" method="get">
+            <form action="register" method="post">
                 <input id="name" name="name" type="text" placeholder="name"/><br>
                 <input id="password" name="password" type="password" placeholder="password"/><br>
                 <input type="submit" value="Zarejestruj"/>

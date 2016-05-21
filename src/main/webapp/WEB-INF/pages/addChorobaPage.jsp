@@ -4,7 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="/resources/static/css/top-menu.css">
-    <link rel="stylesheet" type="text/css" href="/resources/static/css/add-choroba.css">
+    <link rel="stylesheet" type="text/css" href="/resources/static/css/form.css">
 </head>
 <body>
 
@@ -12,12 +12,12 @@
     <div class="menu">
         <ul class="items">
             <li class="item">
-                <a href="/user/welcomePage.html">
+                <a href="/user/chorobaListPage.html">
                     <span>Lista chorób</span>
                 </a>
             </li>
             <li class="item">
-                <a href="/user/userWelcomePage2.html">
+                <a href="/user/lekListPage.html">
                     <span>Lista leków</span></a>
             </li>
             <li class="item selected">
@@ -52,7 +52,7 @@
                     </c:forEach>
                 </select>
             </div>
-            <div class="item">
+            <div class="item wide">
                 <div>Opis choroby:</div>
                 <input type="text" name="description" value="${choroba.description}"/>
             </div>

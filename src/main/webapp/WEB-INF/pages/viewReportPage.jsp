@@ -4,19 +4,18 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="/resources/static/css/top-menu.css">
-    <link rel="stylesheet" type="text/css" href="/resources/static/css/add-choroba.css">
 </head>
 <body>
 <div class="page-wrapper">
     <div class="menu">
         <ul class="items">
             <li class="item">
-                <a href="/user/welcomePage.html">
+                <a href="/user/chorobaListPage.html">
                     <span>Lista chorób</span>
                 </a>
             </li>
             <li class="item">
-                <a href="/user/userWelcomePage2.html">
+                <a href="/user/lekListPage.html">
                     <span>Lista leków</span></a>
             </li>
             <li class="item">

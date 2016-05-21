@@ -1,0 +1,108 @@
+.page-wrapper {
+    height: 100%;
+    width: 100%;
+    background-color: lightgrey;
+    position: relative;
+}
+
+.table-wrapper{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: lightgray;
+}
+
+.table-body {
+    color: #003366;
+}
+
+.table-body tr {
+    background-color: #CCCC99 !important;
+}
+
+.table-body tr td {
+    border-bottom: 1px solid #003366;
+    text-align: center;
+}
+
+.table-body tr td:hover {
+    background-color: #ffffff !important;
+}
+
+.table-body tr td.modify {
+    border-left: 1px solid #003366;
+    text-decoration: none;
+}
+
+.table-body tr td.modify a {
+    text-decoration: none;
+    color: inherit;
+    text-transform: uppercase;
+}
+
+@font-face {
+    font-family: 'doctor';
+    src: url('/resources/static/fonts/Doctor.ttf');
+}
+
+div#chorobaList_info {
+    display: none;
+}
+
+.title, th.list-item {
+    font-family: doctor;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+a.paginate_button {
+    font-family: doctor;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.welcome {
+    font-family: doctor;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.table-wrapper{
+    position: relative;
+}
+
+div#chorobaList_filter label {
+    font-size: 0.000000000000001em;
+}
+
+div#chorobaList_length label {
+    font-size: 0.000000000000001em;
+}
+
+div#chorobaList_length:before {
+    content: 'Pokaz:';
+    font-family: doctor;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+div#chorobaList_filter:before {
+    content: 'Szukaj:';
+    font-family: doctor;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+a#chorobaList_previous {
+    display: none;
+}
+
+a#chorobaList_next {
+    display: none;
+}
+
+
+

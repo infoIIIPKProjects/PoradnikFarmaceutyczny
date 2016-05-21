@@ -26,7 +26,7 @@ public class LoginResultController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/admin/welcomePage.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/chorobaListPage.html", method = RequestMethod.GET)
     public ModelAndView getAdminWelcomePage(Principal principal) {
         String userName = principal.getName();
         User user = service.getUserByUserName(userName);
@@ -35,12 +35,12 @@ public class LoginResultController {
         return model;
     }
 
-    @RequestMapping(value = "/user/welcomePage.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/chorobaListPage.html", method = RequestMethod.GET)
     public ModelAndView getUserWelcomePage(Principal principal) {
         String userName = principal.getName();
         User user = service.getUserByUserName(userName);
         List<Choroba> chorobaList = service.listChoroba();
-        ModelAndView model = new ModelAndView("userWelcomePage");
+        ModelAndView model = new ModelAndView("chorobaListPage");
         model.addObject("chorobaList", chorobaList);
         model.addObject("user", user);
         return model;
@@ -55,8 +55,8 @@ public class LoginResultController {
         return model;
     }
 
-    @RequestMapping(value = "register", method = RequestMethod.GET)
-    public String processRegistration(@ModelAttribute("userForm") User user) {
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public ModelAndView processRegistration(@ModelAttribute("userForm") User user) {
         Role role = new Role();
         role.setId(2);
         user.setRole(role);
@@ -66,6 +66,8 @@ public class LoginResultController {
 //        }
 //        user.setChorobas(chorobaList);
         service.addUserToDB(user);
-        return "mainPage";
+
+        ModelAndView model = new ModelAndView("redirect:/");
+        return model;
     }
 }

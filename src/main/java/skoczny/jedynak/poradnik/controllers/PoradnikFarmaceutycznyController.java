@@ -32,22 +32,22 @@ public class PoradnikFarmaceutycznyController {
     @RequestMapping(value = {"/user/delete-shopping-item{id}"}, method = RequestMethod.GET)
     public String deleteChoroba(@PathVariable String id) {
         service.removeChorobaByID(Integer.parseInt(id));
-        return "redirect:/user/welcomePage.html";
+        return "redirect:/user/chorobaListPage.html";
     }
 
     @RequestMapping(value = {"/user/delete-lek{id}"}, method = RequestMethod.GET)
     public String deleteLek(@PathVariable String id) {
         service.removeLek(Integer.parseInt(id));
-        return "redirect:/user/userWelcomePage2.html";
+        return "redirect:/user/lekListPage.html";
     }
 
-    @RequestMapping(value = "/user/userWelcomePage2.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/lekListPage.html", method = RequestMethod.GET)
     public String getUserWelcomePage2(Model model, Principal principal) {
         String userName = principal.getName();
         User user = service.getUserByUserName(userName);
         model.addAttribute("user", user);
         model.addAttribute("leki", service.listLeki());
-        return "userWelcomePage2";
+        return "lekListPage";
     }
 
     @RequestMapping(value = {"/user/edit-lek{id}"}, method = RequestMethod.GET)
@@ -108,7 +108,7 @@ public class PoradnikFarmaceutycznyController {
 
         service.updateLek(item);
 
-        ModelAndView model = new ModelAndView("redirect:/user/userWelcomePage2.html");
+        ModelAndView model = new ModelAndView("redirect:/user/lekListPage.html");
 
         return model;
     }
@@ -169,7 +169,7 @@ public class PoradnikFarmaceutycznyController {
 
         service.addChorobaToDB(item);
 
-        ModelAndView model = new ModelAndView("redirect:welcomePage.html");
+        ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
 
         return model;
     }
@@ -206,7 +206,7 @@ public class PoradnikFarmaceutycznyController {
         choroba.setLek(item);
         service.updateChorobaToDB(choroba);
 
-        ModelAndView model = new ModelAndView("redirect:/user/userWelcomePage2.html");
+        ModelAndView model = new ModelAndView("redirect:/user/lekListPage.html");
 
         return model;
     }
@@ -241,7 +241,7 @@ public class PoradnikFarmaceutycznyController {
 
         service.updateChorobaToDB(item);
 
-        ModelAndView model = new ModelAndView("redirect:welcomePage.html");
+        ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
 
         return model;
     }

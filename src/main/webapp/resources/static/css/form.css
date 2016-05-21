@@ -57,6 +57,9 @@
 .form-wrapper .item input:hover{
     background-color: #CCCC9A;
 }
+.form-wrapper .item.wide input:hover{
+    width: 100%;
+}
 
 .form-wrapper .item select{
     transition: all 0.3s;
