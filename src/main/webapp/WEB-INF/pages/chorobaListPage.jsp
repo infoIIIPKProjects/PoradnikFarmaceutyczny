@@ -7,7 +7,8 @@
     <script src="${pageContext.request.contextPath}/resources/static/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/resources/static/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/static/css/top-menu.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/static/css/data-table.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/static/css/data-table.css">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/resources/static/css/jquery.dataTables.min.css"/>
 
@@ -30,18 +31,67 @@
                 <a href="/user/lekListPage.html">
                     <span>Lista leków</span></a>
             </li>
-            <li class="item">
-                <a href="/user/addChorobaPage.html">
-                    <span>Dodaj chorobe</span></a>
-            </li>
-            <li class="item">
-                <a href="/user/addLekPage.html">
-                    <span>Dodaj lek</span></a>
-            </li>
-            <li class="item">
-                <a href='/user/viewReportPage${user.id}'>
-                    <span>Pokaz wykresy</span></a>
-            </li>
+
+            <c:choose>
+                <c:when test="${user.role.roleName.equals(\"admin\")}">
+                    <li class="item">
+                        <a href="/user/addChorobaPage.html">
+                            <span>Dodaj chorobe</span></a>
+                    </li>
+                </c:when>
+                <c:when test="${user.role.roleName.equals(\"lekarz\")}">
+                    <li class="item">
+                        <a href="/user/addChorobaPage.html">
+                            <span>Dodaj chorobe</span></a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="item disabled">
+                        <a><span>Dodaj chorobe</span></a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+
+            <c:choose>
+                <c:when test="${user.role.roleName.equals(\"admin\")}">
+                    <li class="item">
+                        <a href="/user/addLekPage.html">
+                            <span>Dodaj lek</span></a>
+                    </li>
+                </c:when>
+                <c:when test="${user.role.roleName.equals(\"magazyn\")}">
+                    <li class="item">
+                        <a href="/user/addLekPage.html">
+                            <span>Dodaj lek</span></a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="item disabled">
+                        <a> <span>Dodaj lek</span> </a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${user.role.roleName.equals(\"admin\")}">
+                    <li class="item">
+                        <a href='/user/viewReportPage${user.id}'>
+                            <span>Pokaz wykresy</span></a>
+                    </li>
+                </c:when>
+
+                <c:when test="${user.role.roleName.equals(\"kierownictwo\")}">
+                    <li class="item">
+                        <a href='/user/viewReportPage${user.id}'>
+                            <span>Pokaz wykresy</span></a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="item disabled">
+                        <a><span>Pokaz wykresy</span> </a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+
             <li class="item right">
                 <a href="<c:url value="/j_spring_security_logout"/>">
                     <span>Wyloguj</span></a>
@@ -49,7 +99,7 @@
         </ul>
     </div>
 
-    <div id = "welcome" class="welcome">Witaj ${user.name}</div>
+    <div id="welcome" class="welcome">Witaj ${user.name}</div>
     <div align="center" class="table-wrapper">
         <div class="title">Choroby</div>
         <table id="chorobaList">
@@ -68,8 +118,26 @@
                     <td>${choroba.kategoriaChoroby}</td>
                     <td>${choroba.description}</td>
                     <td>${choroba.lek}</td>
-                    <td class="modify"><a href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usun</a></td>
-                    <td class="modify"><a href="<c:url value="/user/editChorobaPage${choroba.id}"/>">edytuj</a></td>
+                    <c:choose>
+                        <c:when test="${user.role.roleName.equals(\"admin\")}">
+                            <td class="modify"><a
+                                    href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usun</a>
+                            </td>
+                            <td class="modify"><a href="<c:url value="/user/editChorobaPage${choroba.id}"/>">edytuj</a>
+                            </td>
+                        </c:when>
+                        <c:when test="${user.role.roleName.equals(\"lekarz\")}">
+                            <td class="modify"><a
+                                    href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usun</a>
+                            </td>
+                            <td class="modify"><a href="<c:url value="/user/editChorobaPage${choroba.id}"/>">edytuj</a>
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td class="modify disabled"><a>usun</a></td>
+                            <td class="modify disabled"><a>edytuj</a></td>
+                        </c:otherwise>
+                    </c:choose>
                 </tr>
             </core:forEach>
             </tbody>

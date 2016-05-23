@@ -23,18 +23,6 @@ public class Lek {
     @OneToMany(mappedBy = "lek", fetch = FetchType.EAGER, orphanRemoval = true,cascade = CascadeType.ALL)
     private Collection<Choroba> chorobas = new ArrayList<Choroba>();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Collection<Choroba> getChorobas() {
         return chorobas;
     }

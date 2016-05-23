@@ -4,7 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import skoczny.jedynak.poradnik.model.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DBLoader {
@@ -19,123 +22,131 @@ public class DBLoader {
 
 
 //===============  ROLE  ==============================
+        Role lekarz = addRoleToDB("lekarz");
+
+        Role aptekarz = addRoleToDB("aptekarz");
+
+        Role magazyn = addRoleToDB("magazyn");
+
+        Role kierownictwo = addRoleToDB("kierownictwo");
+
         Role admin = addRoleToDB("admin");
 
         Role user = addRoleToDB("user");
 //===============  USER -> defaultUser ==============================
-        User defaultUser = addUserToDB("user", "password", "default.user@gmail.com", new Date(), user);
+        //User defaultUser = addUserToDB("user", "password", "default.user@gmail.com", user);
 //===============  LEK ==============================
-        Lek aerius = addLekToDB(defaultUser, "Aerius", randomAvailability(), randomPrize());
+        Lek aerius = addLekToDB("Aerius", randomAvailability(), randomPrize());
 
-        Lek acatarZatoki = addLekToDB(defaultUser, "Acatar Zatoki", randomAvailability(), randomPrize());
+        Lek acatarZatoki = addLekToDB("Acatar Zatoki", randomAvailability(), randomPrize());
 
-        Lek acidolac = addLekToDB(defaultUser, "Acidolac ", randomAvailability(), randomPrize());
+        Lek acidolac = addLekToDB("Acidolac ", randomAvailability(), randomPrize());
 
-        Lek albothyl = addLekToDB(defaultUser, "Albothyl ", randomAvailability(), randomPrize());
+        Lek albothyl = addLekToDB("Albothyl ", randomAvailability(), randomPrize());
 
-        Lek anafranil = addLekToDB(defaultUser, "Anafranil", randomAvailability(), randomPrize());
+        Lek anafranil = addLekToDB("Anafranil", randomAvailability(), randomPrize());
 
-        Lek baikaderm = addLekToDB(defaultUser, "Baikaderm ", randomAvailability(), randomPrize());
+        Lek baikaderm = addLekToDB("Baikaderm ", randomAvailability(), randomPrize());
 
-        Lek baraclude = addLekToDB(defaultUser, "Baraclude", randomAvailability(), randomPrize());
+        Lek baraclude = addLekToDB("Baraclude", randomAvailability(), randomPrize());
 
-        Lek bebilon = addLekToDB(defaultUser, "Bebilon ", randomAvailability(), randomPrize());
+        Lek bebilon = addLekToDB("Bebilon ", randomAvailability(), randomPrize());
 
-        Lek betadrin = addLekToDB(defaultUser, "Betadrin ", randomAvailability(), randomPrize());
+        Lek betadrin = addLekToDB("Betadrin ", randomAvailability(), randomPrize());
 
-        Lek biseptol = addLekToDB(defaultUser, "Biseptol", randomAvailability(), randomPrize());
+        Lek biseptol = addLekToDB("Biseptol", randomAvailability(), randomPrize());
 
-        Lek cepastil = addLekToDB(defaultUser, "Cepastil ", randomAvailability(), randomPrize());
+        Lek cepastil = addLekToDB("Cepastil ", randomAvailability(), randomPrize());
 
-        Lek calcenato = addLekToDB(defaultUser, "Calcenato", randomAvailability(), randomPrize());
+        Lek calcenato = addLekToDB("Calcenato", randomAvailability(), randomPrize());
 
-        Lek dicloabak = addLekToDB(defaultUser, "Dicloabak ", randomAvailability(), randomPrize());
+        Lek dicloabak = addLekToDB("Dicloabak ", randomAvailability(), randomPrize());
 
-        Lek daktarin = addLekToDB(defaultUser, "Daktarin", randomAvailability(), randomPrize());
+        Lek daktarin = addLekToDB("Daktarin", randomAvailability(), randomPrize());
 
-        Lek grypolek = addLekToDB(defaultUser, "Grypolek ", randomAvailability(), randomPrize());
+        Lek grypolek = addLekToDB("Grypolek ", randomAvailability(), randomPrize());
 
-        Lek gaviscon = addLekToDB(defaultUser, "Gaviscon ", randomAvailability(), randomPrize());
+        Lek gaviscon = addLekToDB("Gaviscon ", randomAvailability(), randomPrize());
 
-        Lek fludara = addLekToDB(defaultUser, "Fludara", randomAvailability(), randomPrize());
+        Lek fludara = addLekToDB("Fludara", randomAvailability(), randomPrize());
 
-        Lek fenistil = addLekToDB(defaultUser, "Fenistil ", randomAvailability(), randomPrize());
+        Lek fenistil = addLekToDB("Fenistil ", randomAvailability(), randomPrize());
 
-        Lek eprex = addLekToDB(defaultUser, "Eprex", randomAvailability(), randomPrize());
+        Lek eprex = addLekToDB("Eprex", randomAvailability(), randomPrize());
 
-        Lek elobaza = addLekToDB(defaultUser, "Elo-baza ", randomAvailability(), randomPrize());
+        Lek elobaza = addLekToDB("Elo-baza ", randomAvailability(), randomPrize());
 
-        Lek hascoderm = addLekToDB(defaultUser, "Hascoderm", randomAvailability(), randomPrize());
+        Lek hascoderm = addLekToDB("Hascoderm", randomAvailability(), randomPrize());
 
-        Lek hydroskin = addLekToDB(defaultUser, "Hydroskin", randomAvailability(), randomPrize());
+        Lek hydroskin = addLekToDB("Hydroskin", randomAvailability(), randomPrize());
 
-        Lek ibuprom = addLekToDB(defaultUser, "Ibuprom", randomAvailability(), randomPrize());
+        Lek ibuprom = addLekToDB("Ibuprom", randomAvailability(), randomPrize());
 
-        Lek itragen = addLekToDB(defaultUser, "Itragen ", randomAvailability(), randomPrize());
+        Lek itragen = addLekToDB("Itragen ", randomAvailability(), randomPrize());
 
-        Lek javlor = addLekToDB(defaultUser, "Javlor ", randomAvailability(), randomPrize());
+        Lek javlor = addLekToDB("Javlor ", randomAvailability(), randomPrize());
 
-        Lek jovesto = addLekToDB(defaultUser, "Jovesto", randomAvailability(), randomPrize());
+        Lek jovesto = addLekToDB("Jovesto", randomAvailability(), randomPrize());
 
-        Lek kamiren = addLekToDB(defaultUser, "Kamiren ", randomAvailability(), randomPrize());
+        Lek kamiren = addLekToDB("Kamiren ", randomAvailability(), randomPrize());
 
-        Lek klimicin = addLekToDB(defaultUser, "Klimicin", randomAvailability(), randomPrize());
+        Lek klimicin = addLekToDB("Klimicin", randomAvailability(), randomPrize());
 
-        Lek laremid = addLekToDB(defaultUser, "Laremid", randomAvailability(), randomPrize());
+        Lek laremid = addLekToDB("Laremid", randomAvailability(), randomPrize());
 
-        Lek logest = addLekToDB(defaultUser, "Logest ", randomAvailability(), randomPrize());
+        Lek logest = addLekToDB("Logest ", randomAvailability(), randomPrize());
 
-        Lek marbodin = addLekToDB(defaultUser, "Marbodin", randomAvailability(), randomPrize());
+        Lek marbodin = addLekToDB("Marbodin", randomAvailability(), randomPrize());
 
-        Lek menopur = addLekToDB(defaultUser, "Menopur ", randomAvailability(), randomPrize());
+        Lek menopur = addLekToDB("Menopur ", randomAvailability(), randomPrize());
 
-        Lek nakom = addLekToDB(defaultUser, "Nakom", randomAvailability(), randomPrize());
+        Lek nakom = addLekToDB("Nakom", randomAvailability(), randomPrize());
 
-        Lek nervosol = addLekToDB(defaultUser, "Nervosol", randomAvailability(), randomPrize());
+        Lek nervosol = addLekToDB("Nervosol", randomAvailability(), randomPrize());
 
-        Lek oeparol = addLekToDB(defaultUser, "Oeparol", randomAvailability(), randomPrize());
+        Lek oeparol = addLekToDB("Oeparol", randomAvailability(), randomPrize());
 
-        Lek optive = addLekToDB(defaultUser, "Optive ", randomAvailability(), randomPrize());
+        Lek optive = addLekToDB("Optive ", randomAvailability(), randomPrize());
 
-        Lek pentaglobin = addLekToDB(defaultUser, "Pentaglobin", randomAvailability(), randomPrize());
+        Lek pentaglobin = addLekToDB("Pentaglobin", randomAvailability(), randomPrize());
 
-        Lek plavocorin = addLekToDB(defaultUser, "Plavocorin", randomAvailability(), randomPrize());
+        Lek plavocorin = addLekToDB("Plavocorin", randomAvailability(), randomPrize());
 
-        Lek quatrum = addLekToDB(defaultUser, "Quatrum", randomAvailability(), randomPrize());
+        Lek quatrum = addLekToDB("Quatrum", randomAvailability(), randomPrize());
 
-        Lek qumag = addLekToDB(defaultUser, "Qumag", randomAvailability(), randomPrize());
+        Lek qumag = addLekToDB("Qumag", randomAvailability(), randomPrize());
 
-        Lek ramistad = addLekToDB(defaultUser, "Ramistad", randomAvailability(), randomPrize());
+        Lek ramistad = addLekToDB("Ramistad", randomAvailability(), randomPrize());
 
-        Lek risperon = addLekToDB(defaultUser, "Risperon", randomAvailability(), randomPrize());
+        Lek risperon = addLekToDB("Risperon", randomAvailability(), randomPrize());
 
-        Lek sclefic = addLekToDB(defaultUser, "Sclefic", randomAvailability(), randomPrize());
+        Lek sclefic = addLekToDB("Sclefic", randomAvailability(), randomPrize());
 
-        Lek sulphera = addLekToDB(defaultUser, "Sulphera", randomAvailability(), randomPrize());
+        Lek sulphera = addLekToDB("Sulphera", randomAvailability(), randomPrize());
 
-        Lek tacefur = addLekToDB(defaultUser, "Tacefur", randomAvailability(), randomPrize());
+        Lek tacefur = addLekToDB("Tacefur", randomAvailability(), randomPrize());
 
-        Lek telmisartan = addLekToDB(defaultUser, "Telmisartan", randomAvailability(), randomPrize());
+        Lek telmisartan = addLekToDB("Telmisartan", randomAvailability(), randomPrize());
 
-        Lek ulgix = addLekToDB(defaultUser, "Ulgix", randomAvailability(), randomPrize());
+        Lek ulgix = addLekToDB("Ulgix", randomAvailability(), randomPrize());
 
-        Lek ursocam = addLekToDB(defaultUser, "Ursocam", randomAvailability(), randomPrize());
+        Lek ursocam = addLekToDB("Ursocam", randomAvailability(), randomPrize());
 
-        Lek valsacor = addLekToDB(defaultUser, "Valsacor", randomAvailability(), randomPrize());
+        Lek valsacor = addLekToDB("Valsacor", randomAvailability(), randomPrize());
 
-        Lek venomenhal = addLekToDB(defaultUser, "Venomenhal", randomAvailability(), randomPrize());
+        Lek venomenhal = addLekToDB("Venomenhal", randomAvailability(), randomPrize());
 
-        Lek wegiel = addLekToDB(defaultUser, "Wegiel leczniczy", randomAvailability(), randomPrize());
+        Lek wegiel = addLekToDB("Wegiel leczniczy", randomAvailability(), randomPrize());
 
-        Lek wolarex = addLekToDB(defaultUser, "Wolarex", randomAvailability(), randomPrize());
+        Lek wolarex = addLekToDB("Wolarex", randomAvailability(), randomPrize());
 
-        Lek xaloptic = addLekToDB(defaultUser, "Xaloptic Combi", randomAvailability(), randomPrize());
+        Lek xaloptic = addLekToDB("Xaloptic Combi", randomAvailability(), randomPrize());
 
-        Lek xylometazolin = addLekToDB(defaultUser, "Xylometazolin", randomAvailability(), randomPrize());
+        Lek xylometazolin = addLekToDB("Xylometazolin", randomAvailability(), randomPrize());
 
-        Lek zajavit = addLekToDB(defaultUser, "Zajavit", randomAvailability(), randomPrize());
+        Lek zajavit = addLekToDB("Zajavit", randomAvailability(), randomPrize());
 
-        Lek ziagen = addLekToDB(defaultUser, "Ziagen", randomAvailability(), randomPrize());
+        Lek ziagen = addLekToDB("Ziagen", randomAvailability(), randomPrize());
 
 //===============  KATEGORIA CHOROBY ==============================
 
@@ -200,70 +211,69 @@ public class DBLoader {
         KategoriaChoroby zwyrodnieniowe = addKategoriaChorobyToDB("Choroby zwyrodnieniowe");
         kategorie.add(zwyrodnieniowe);
 //===============  CHOROBA  ==============================
-        addChorobaToDB("Zapalenie ucha srodkowego", tacefur, randomCategory(), defaultUser, ChorobyOpisy.zapalenieUcha);
-        addChorobaToDB("Zawal", tacefur, randomCategory(), defaultUser, ChorobyOpisy.zawal);
-        addChorobaToDB("Wzdecia", ulgix, randomCategory(), defaultUser, ChorobyOpisy.wzdecia);
-        addChorobaToDB("Pierwotna zolciowa marskosc watroby", ursocam, randomCategory(), defaultUser, ChorobyOpisy.marskosc);
-        addChorobaToDB("Kaszel", ursocam, randomCategory(), defaultUser, ChorobyOpisy.kaszel);
-        addChorobaToDB("Alergie", venomenhal, randomCategory(), defaultUser, ChorobyOpisy.alergie);
-        addChorobaToDB("Problemy zoladkowe", wegiel, randomCategory(), defaultUser, ChorobyOpisy.problemyZoladkowe);
-        addChorobaToDB("Niedoczynnosc tarczycy", wolarex, randomCategory(), defaultUser, ChorobyOpisy.niedoTarczycy);
-        addChorobaToDB("Bol oka", venomenhal, randomCategory(), defaultUser, ChorobyOpisy.bolOka);
-        addChorobaToDB("Zapalenie zatok przynosowych", xylometazolin, randomCategory(), defaultUser, ChorobyOpisy.zapalenieZatok);
-        addChorobaToDB("Szkorbut", zajavit, randomCategory(), defaultUser, ChorobyOpisy.szkorbut);
-        addChorobaToDB("HIV", ziagen, randomCategory(), defaultUser, ChorobyOpisy.hiv);
-        addChorobaToDB("Parkinson", nakom, randomCategory(), defaultUser, ChorobyOpisy.parkinson);
-        addChorobaToDB("Nerwica", nervosol, randomCategory(), defaultUser, ChorobyOpisy.nerwica);
-        addChorobaToDB("Choroba serca", oeparol, randomCategory(), defaultUser, ChorobyOpisy.chorobaSrca);
-        addChorobaToDB("Zespol suchego oka", optive, randomCategory(), defaultUser, ChorobyOpisy.sucheOko);
-        addChorobaToDB("Zakazenia bakteryjne", pentaglobin, randomCategory(), defaultUser, ChorobyOpisy.zakazenieBakteryjne);
-        addChorobaToDB("Miazdzyca", plavocorin, randomCategory(), defaultUser, ChorobyOpisy.maizdzyca);
-        addChorobaToDB("Problemy zoladkowe", plavocorin, randomCategory(), defaultUser, ChorobyOpisy.problemyZoladkowe);
-        addChorobaToDB("Problemy sercowo-naczyniowe", qumag, randomCategory(), defaultUser, ChorobyOpisy.chorobaSrca);
-        addChorobaToDB("Cukrzyca", ramistad, randomCategory(), defaultUser, ChorobyOpisy.cukrzyca);
-        addChorobaToDB("Schizofrenia", risperon, randomCategory(), defaultUser, ChorobyOpisy.schizofrenia);
-        addChorobaToDB("Stwardnienie zanikowe boczne", sclefic, randomCategory(), defaultUser, ChorobyOpisy.stwardnienieBoczne);
-        addChorobaToDB("Luszczyca", sulphera, randomCategory(), defaultUser, ChorobyOpisy.luszczyca);
-        addChorobaToDB("Tradzik", hascoderm, randomCategory(), defaultUser, ChorobyOpisy.tradzi);
-        addChorobaToDB("Sucha skora", hydroskin, randomCategory(), defaultUser, ChorobyOpisy.suchaSkora);
-        addChorobaToDB("Bole wszelkiego rodzaju", ibuprom, randomCategory(), defaultUser, ChorobyOpisy.bole);
-        addChorobaToDB("Grzybica skory", itragen, randomCategory(), defaultUser, ChorobyOpisy.grzybica);
-        addChorobaToDB("Rak drog moczowych", javlor, randomCategory(), defaultUser, ChorobyOpisy.rakMocz);
-        addChorobaToDB("Przerost gruczolu krokowego", jovesto, randomCategory(), defaultUser, ChorobyOpisy.przerostGr);
-        addChorobaToDB("Bialaczka", kamiren, randomCategory(), defaultUser, ChorobyOpisy.bilaczka);
-        addChorobaToDB("Zakazenia ukladu oddechowego", klimicin, randomCategory(), defaultUser, ChorobyOpisy.zakazenie);
-        addChorobaToDB("Biegunka", laremid, randomCategory(), defaultUser, ChorobyOpisy.biegunka);
-        addChorobaToDB("Antykoncepcja", logest, randomCategory(), defaultUser, ChorobyOpisy.anty);
-        addChorobaToDB("Alzheimer", marbodin, randomCategory(), defaultUser, ChorobyOpisy.alzheimer);
-        addChorobaToDB("Przeziebienie", cepastil, randomCategory(), defaultUser, ChorobyOpisy.przeziebienie);
-        addChorobaToDB("Niedobor wapnia", calcenato, randomCategory(), defaultUser, ChorobyOpisy.niedoborWapnia);
-        addChorobaToDB("Grzybica skory", dicloabak, randomCategory(), defaultUser, ChorobyOpisy.grzybicaSkory);
-        addChorobaToDB("Grzybica skory", laremid, randomCategory(), defaultUser, ChorobyOpisy.grzybicaSkory);
-        addChorobaToDB("Grypa", grypolek, randomCategory(), defaultUser, ChorobyOpisy.grypa);
-        addChorobaToDB("Refluks zoladkowy", gaviscon, randomCategory(), defaultUser, ChorobyOpisy.refluks);
-        addChorobaToDB("Bialaczka", fludara, randomCategory(), defaultUser, ChorobyOpisy.bialaczka);
-        addChorobaToDB("Ukaszenie", fenistil, randomCategory(), defaultUser, ChorobyOpisy.ukaszenie);
-        addChorobaToDB("Niewydolnosc nerek", eprex, randomCategory(), defaultUser, ChorobyOpisy.nerki);
-        addChorobaToDB("Problemy skorne", elobaza, randomCategory(), defaultUser, ChorobyOpisy.skora);
-        addChorobaToDB("Alergia blony sluzowej nosa", elobaza, randomCategory(), defaultUser, ChorobyOpisy.nosAlergia);
-        addChorobaToDB("Katar", acatarZatoki, randomCategory(), defaultUser, ChorobyOpisy.katar);
-        addChorobaToDB("Zaburzenia flory bakteryjnej", acidolac, randomCategory(), defaultUser, ChorobyOpisy.zaburzeniaFlory);
-        addChorobaToDB("Zapalenie miejsc intymnych", albothyl, randomCategory(), defaultUser, ChorobyOpisy.zapalanieInt);
-        addChorobaToDB("Depresja", anafranil, randomCategory(), defaultUser, ChorobyOpisy.depresja);
-        addChorobaToDB("Zapalenie skory", elobaza, randomCategory(), defaultUser, ChorobyOpisy.zapalanie);
-        addChorobaToDB("Zapalenie watroby", baraclude, randomCategory(), defaultUser, ChorobyOpisy.zapWatroby);
-        addChorobaToDB("Niedobor witamin", bebilon, randomCategory(), defaultUser, ChorobyOpisy.wit);
-        addChorobaToDB("Niezyt nosa", betadrin, randomCategory(), defaultUser, ChorobyOpisy.katar);
-        addChorobaToDB("Zakazenie drog oddechowych", biseptol, randomCategory(), defaultUser, ChorobyOpisy.zakazenie);
+        addChorobaToDB("Zapalenie ucha srodkowego", tacefur, randomCategory(), ChorobyOpisy.zapalenieUcha);
+        addChorobaToDB("Zawal", tacefur, randomCategory(), ChorobyOpisy.zawal);
+        addChorobaToDB("Wzdecia", ulgix, randomCategory(), ChorobyOpisy.wzdecia);
+        addChorobaToDB("Pierwotna zolciowa marskosc watroby", ursocam, randomCategory(), ChorobyOpisy.marskosc);
+        addChorobaToDB("Kaszel", ursocam, randomCategory(), ChorobyOpisy.kaszel);
+        addChorobaToDB("Alergie", venomenhal, randomCategory(), ChorobyOpisy.alergie);
+        addChorobaToDB("Problemy zoladkowe", wegiel, randomCategory(), ChorobyOpisy.problemyZoladkowe);
+        addChorobaToDB("Niedoczynnosc tarczycy", wolarex, randomCategory(), ChorobyOpisy.niedoTarczycy);
+        addChorobaToDB("Bol oka", venomenhal, randomCategory(), ChorobyOpisy.bolOka);
+        addChorobaToDB("Zapalenie zatok przynosowych", xylometazolin, randomCategory(), ChorobyOpisy.zapalenieZatok);
+        addChorobaToDB("Szkorbut", zajavit, randomCategory(), ChorobyOpisy.szkorbut);
+        addChorobaToDB("HIV", ziagen, randomCategory(), ChorobyOpisy.hiv);
+        addChorobaToDB("Parkinson", nakom, randomCategory(), ChorobyOpisy.parkinson);
+        addChorobaToDB("Nerwica", nervosol, randomCategory(), ChorobyOpisy.nerwica);
+        addChorobaToDB("Choroba serca", oeparol, randomCategory(), ChorobyOpisy.chorobaSrca);
+        addChorobaToDB("Zespol suchego oka", optive, randomCategory(), ChorobyOpisy.sucheOko);
+        addChorobaToDB("Zakazenia bakteryjne", pentaglobin, randomCategory(), ChorobyOpisy.zakazenieBakteryjne);
+        addChorobaToDB("Miazdzyca", plavocorin, randomCategory(), ChorobyOpisy.maizdzyca);
+        addChorobaToDB("Problemy zoladkowe", plavocorin, randomCategory(), ChorobyOpisy.problemyZoladkowe);
+        addChorobaToDB("Problemy sercowo-naczyniowe", qumag, randomCategory(), ChorobyOpisy.chorobaSrca);
+        addChorobaToDB("Cukrzyca", ramistad, randomCategory(), ChorobyOpisy.cukrzyca);
+        addChorobaToDB("Schizofrenia", risperon, randomCategory(), ChorobyOpisy.schizofrenia);
+        addChorobaToDB("Stwardnienie zanikowe boczne", sclefic, randomCategory(), ChorobyOpisy.stwardnienieBoczne);
+        addChorobaToDB("Luszczyca", sulphera, randomCategory(), ChorobyOpisy.luszczyca);
+        addChorobaToDB("Tradzik", hascoderm, randomCategory(), ChorobyOpisy.tradzi);
+        addChorobaToDB("Sucha skora", hydroskin, randomCategory(), ChorobyOpisy.suchaSkora);
+        addChorobaToDB("Bole wszelkiego rodzaju", ibuprom, randomCategory(), ChorobyOpisy.bole);
+        addChorobaToDB("Grzybica skory", itragen, randomCategory(), ChorobyOpisy.grzybica);
+        addChorobaToDB("Rak drog moczowych", javlor, randomCategory(), ChorobyOpisy.rakMocz);
+        addChorobaToDB("Przerost gruczolu krokowego", jovesto, randomCategory(), ChorobyOpisy.przerostGr);
+        addChorobaToDB("Bialaczka", kamiren, randomCategory(), ChorobyOpisy.bilaczka);
+        addChorobaToDB("Zakazenia ukladu oddechowego", klimicin, randomCategory(), ChorobyOpisy.zakazenie);
+        addChorobaToDB("Biegunka", laremid, randomCategory(), ChorobyOpisy.biegunka);
+        addChorobaToDB("Antykoncepcja", logest, randomCategory(), ChorobyOpisy.anty);
+        addChorobaToDB("Alzheimer", marbodin, randomCategory(), ChorobyOpisy.alzheimer);
+        addChorobaToDB("Przeziebienie", cepastil, randomCategory(), ChorobyOpisy.przeziebienie);
+        addChorobaToDB("Niedobor wapnia", calcenato, randomCategory(), ChorobyOpisy.niedoborWapnia);
+        addChorobaToDB("Grzybica skory", dicloabak, randomCategory(), ChorobyOpisy.grzybicaSkory);
+        addChorobaToDB("Grzybica skory", laremid, randomCategory(), ChorobyOpisy.grzybicaSkory);
+        addChorobaToDB("Grypa", grypolek, randomCategory(), ChorobyOpisy.grypa);
+        addChorobaToDB("Refluks zoladkowy", gaviscon, randomCategory(), ChorobyOpisy.refluks);
+        addChorobaToDB("Bialaczka", fludara, randomCategory(), ChorobyOpisy.bialaczka);
+        addChorobaToDB("Ukaszenie", fenistil, randomCategory(), ChorobyOpisy.ukaszenie);
+        addChorobaToDB("Niewydolnosc nerek", eprex, randomCategory(), ChorobyOpisy.nerki);
+        addChorobaToDB("Problemy skorne", elobaza, randomCategory(), ChorobyOpisy.skora);
+        addChorobaToDB("Alergia blony sluzowej nosa", elobaza, randomCategory(), ChorobyOpisy.nosAlergia);
+        addChorobaToDB("Katar", acatarZatoki, randomCategory(), ChorobyOpisy.katar);
+        addChorobaToDB("Zaburzenia flory bakteryjnej", acidolac, randomCategory(), ChorobyOpisy.zaburzeniaFlory);
+        addChorobaToDB("Zapalenie miejsc intymnych", albothyl, randomCategory(), ChorobyOpisy.zapalanieInt);
+        addChorobaToDB("Depresja", anafranil, randomCategory(), ChorobyOpisy.depresja);
+        addChorobaToDB("Zapalenie skory", elobaza, randomCategory(), ChorobyOpisy.zapalanie);
+        addChorobaToDB("Zapalenie watroby", baraclude, randomCategory(), ChorobyOpisy.zapWatroby);
+        addChorobaToDB("Niedobor witamin", bebilon, randomCategory(), ChorobyOpisy.wit);
+        addChorobaToDB("Niezyt nosa", betadrin, randomCategory(), ChorobyOpisy.katar);
+        addChorobaToDB("Zakazenie drog oddechowych", biseptol, randomCategory(), ChorobyOpisy.zakazenie);
 
         session.getTransaction().commit();
         session.close();
     }
 
-    private void addChorobaToDB(String nazwa, Lek lek, KategoriaChoroby kategoriaChoroby, User user, String description) {
+    private void addChorobaToDB(String nazwa, Lek lek, KategoriaChoroby kategoriaChoroby, String description) {
         Choroba choroba = new Choroba();
         choroba.setNazwa(nazwa);
-        choroba.setUser(user);
         choroba.setLek(lek);
         choroba.setDescription(description);
         choroba.setKategoriaChoroby(kategoriaChoroby);
@@ -278,12 +288,11 @@ public class DBLoader {
         return role;
     }
 
-    private User addUserToDB(String userName, String password, String email, Date defaultReportDate, Role role) {
+    private User addUserToDB(String userName, String password, String email, Role role) {
         User user = new User();
         user.setName(userName);
         user.setPassword(password);
         user.setEmail(email);
-        user.setDefaultReportDate(defaultReportDate);
         user.setRole(role);
         session.save(user);
 
@@ -298,9 +307,8 @@ public class DBLoader {
         return kategoriaChoroby;
     }
 
-    private Lek addLekToDB(User user, String lekName, boolean czyDostepny, double cena) {
+    private Lek addLekToDB(String lekName, boolean czyDostepny, double cena) {
         Lek lek = new Lek();
-        lek.setUser(user);
         lek.setLekName(lekName);
         lek.setCena(cena);
         lek.setCzyDostepny(czyDostepny);

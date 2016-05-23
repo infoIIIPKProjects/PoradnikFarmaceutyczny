@@ -5,7 +5,7 @@
     position: relative;
 }
 
-.table-wrapper{
+.table-wrapper {
     position: absolute;
     width: 100%;
     background-color: lightgray;
@@ -26,6 +26,13 @@
 
 .table-body tr td:hover {
     background-color: #ffffff !important;
+}
+
+.table-body tr td.modify.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    background: #CCC;
+
 }
 
 .table-body tr td.modify {

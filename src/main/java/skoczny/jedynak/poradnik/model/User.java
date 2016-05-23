@@ -21,12 +21,6 @@ public class User {
     @Column(name = "default_report_date")
     private Date defaultReportDate;
 
-    @OneToMany(mappedBy = "user")
-    private List<Choroba> chorobas = new ArrayList<Choroba>();
-
-    @OneToMany(mappedBy = "user")
-    private List<Lek> leki = new ArrayList<Lek>();
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -37,14 +31,6 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public List<Choroba> getChorobas() {
-        return chorobas;
-    }
-
-    public void setChorobas(List<Choroba> chorobas) {
-        this.chorobas = chorobas;
     }
 
     public int getId() {
@@ -87,14 +73,6 @@ public class User {
         this.defaultReportDate = defaultReportDate;
     }
 
-    public List<Lek> getLeki() {
-        return leki;
-    }
-
-    public void setLeki(List<Lek> leki) {
-        this.leki = leki;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -103,7 +81,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", defaultReportDate=" + defaultReportDate +
-                ", chorobas=" + chorobas +
                 ", role=" + role +
                 '}';
     }

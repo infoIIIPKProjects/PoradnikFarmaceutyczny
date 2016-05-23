@@ -9,10 +9,6 @@ public class Choroba {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lek_id")
     private Lek lek;
@@ -34,14 +30,6 @@ public class Choroba {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public KategoriaChoroby getKategoriaChoroby() {
@@ -98,7 +86,6 @@ public class Choroba {
 
         if (id != choroba.id) return false;
         if (Float.compare(choroba.amount, amount) != 0) return false;
-        if (user != null ? !user.equals(choroba.user) : choroba.user != null) return false;
         if (lek != null ? !lek.equals(choroba.lek) : choroba.lek != null) return false;
         if (kategoriaChoroby != null ? !kategoriaChoroby.equals(choroba.kategoriaChoroby) : choroba.kategoriaChoroby != null)
             return false;
@@ -110,7 +97,6 @@ public class Choroba {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (lek != null ? lek.hashCode() : 0);
         result = 31 * result + (kategoriaChoroby != null ? kategoriaChoroby.hashCode() : 0);
         result = 31 * result + (amount != +0.0f ? Float.floatToIntBits(amount) : 0);

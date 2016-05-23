@@ -90,14 +90,7 @@ public class PoradnikFarmaceutycznyController {
                                         @RequestParam("dostepnosc") String dostepnosc
     ) {
         Lek item = service.getLekById(Integer.parseInt(lekId));
-        // service.removeChorobaByID(Integer.parseInt(id));
-        // user
-        item.setUser(service.getUserByUserName(principal.getName()));
-
-        // nazwa
         item.setLekName(nazwa);
-
-        // cena
         item.setCena(Double.valueOf(cena));
 
         if (dostepnosc.equals("tak")) {
@@ -128,14 +121,12 @@ public class PoradnikFarmaceutycznyController {
 
     @RequestMapping(value = "/user/addLekPage.html", method = RequestMethod.GET)
     public String addLek(Model model, Principal principal) {
-
         User user = service.getUserByUserName(principal.getName());
         model.addAttribute("nazwa", "");
         model.addAttribute("cena", "");
         model.addAttribute("dostepnosc", "");
         model.addAttribute("choroba", service.listChoroba());
         model.addAttribute("user", user);
-
         return "addLekPage";
     }
 
@@ -149,26 +140,16 @@ public class PoradnikFarmaceutycznyController {
 
     ) {
         Choroba item = new Choroba();
-        // service.removeChorobaByID(Integer.parseInt(id));
-        // user
-        item.setUser(service.getUserByUserName(principal.getName()));
-
-        // nazwa
         item.setNazwa(nazwa);
 
-        // kategoria
         KategoriaChoroby kategoriaChoroby = service.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
         item.setKategoriaChoroby(kategoriaChoroby);
 
-        // lek
         Lek shop = service.getLekById(Integer.parseInt(lekId));
         item.setLek(shop);
-
-        // description
         item.setDescription(description);
 
         service.addChorobaToDB(item);
-
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
 
         return model;
@@ -182,17 +163,9 @@ public class PoradnikFarmaceutycznyController {
                                        @RequestParam("choroba") String chorobas_id
     ) {
         Lek item = new Lek();
-        // service.removeChorobaByID(Integer.parseInt(id));
-        // user
-        item.setUser(service.getUserByUserName(principal.getName()));
-
-        // nazwa
         item.setLekName(nazwa);
-
-        // cena
         item.setCena(Double.valueOf(cena));
 
-        // dostepnosc
         if (dostepnosc.equals("tak")) {
             item.setCzyDostepny(true);
         } else {
@@ -201,13 +174,10 @@ public class PoradnikFarmaceutycznyController {
 
         Choroba choroba = service.getChorobaID(Integer.parseInt(chorobas_id));
         item.getChorobas().add(choroba);
-
-        //service.addLek(item);
         choroba.setLek(item);
         service.updateChorobaToDB(choroba);
 
         ModelAndView model = new ModelAndView("redirect:/user/lekListPage.html");
-
         return model;
     }
 
@@ -220,29 +190,21 @@ public class PoradnikFarmaceutycznyController {
                                             @RequestParam("nazwa") String nazwa
     ) {
         Choroba item = service.getChorobaID(Integer.parseInt(chorobaId));
-        // service.removeChorobaByID(Integer.parseInt(id));
-        // user
-        item.setUser(service.getUserByUserName(principal.getName()));
 
-        // nazwa
         item.setNazwa(nazwa);
 
-        // kategoria
         KategoriaChoroby kategoriaChoroby = service.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
         item.setKategoriaChoroby(kategoriaChoroby);
 
-        // lek
         Lek lek = service.getLekById(Integer.parseInt(lekId));
 
         resolveNoDataChange(item, lek);
 
-        // description
         item.setDescription(description);
 
         service.updateChorobaToDB(item);
 
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
-
         return model;
     }
 
@@ -257,7 +219,9 @@ public class PoradnikFarmaceutycznyController {
     }
 
     @RequestMapping(value = "/user/viewReportPage{id}", method = RequestMethod.GET)
-    public String viewUserReport(Model model) {
+    public String viewUserReport(Model model, Principal principal) {
+        User user = service.getUserByUserName(principal.getName());
+        model.addAttribute("user", user);
 
         List<Choroba> kategoriaChorobies = service.listChoroba();
         Map<String, Double> kategorieIlosc = prepareDataForKategorieChorob(kategoriaChorobies);

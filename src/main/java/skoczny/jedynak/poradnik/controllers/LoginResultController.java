@@ -1,6 +1,7 @@
 package skoczny.jedynak.poradnik.controllers;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import skoczny.jedynak.poradnik.model.Choroba;
 import skoczny.jedynak.poradnik.model.Role;
 import skoczny.jedynak.poradnik.model.User;
@@ -13,11 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class LoginResultController {
+    private static Map<String, Integer> idRoles = new HashMap<String, Integer>() {{
+        put("lekarz", 1);
+        put("aptekarz", 2);
+        put("magazyn", 3);
+        put("kierownictwo", 4);
+        put("admin", 5);
+    }};
     @Autowired(required = true)
     @Qualifier(value = "poradnikFarmaceutycznyService")
     private PoradnikFarmaceutycznyService service;
@@ -58,13 +67,8 @@ public class LoginResultController {
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public ModelAndView processRegistration(@ModelAttribute("userForm") User user) {
         Role role = new Role();
-        role.setId(2);
+        role.setId(idRoles.get("admin"));
         user.setRole(role);
-//        List<Choroba> chorobaList = service.listChoroba();
-//        for (Choroba choroba : chorobaList) {
-//            choroba.setUser(user);
-//        }
-//        user.setChorobas(chorobaList);
         service.addUserToDB(user);
 
         ModelAndView model = new ModelAndView("redirect:/");
