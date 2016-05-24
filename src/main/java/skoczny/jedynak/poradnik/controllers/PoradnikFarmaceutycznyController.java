@@ -1,5 +1,6 @@
 package skoczny.jedynak.poradnik.controllers;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.*;
 
 @Controller
 public class PoradnikFarmaceutycznyController {
+
     @Autowired(required = true)
     @Qualifier(value = "poradnikFarmaceutycznyService")
     private PoradnikFarmaceutycznyService service;
@@ -89,20 +91,71 @@ public class PoradnikFarmaceutycznyController {
                                         @RequestParam("cena") String cena,
                                         @RequestParam("dostepnosc") String dostepnosc
     ) {
-        Lek item = service.getLekById(Integer.parseInt(lekId));
-        item.setLekName(nazwa);
-        item.setCena(Double.valueOf(cena));
-
-        if (dostepnosc.equals("tak")) {
-            item.setCzyDostepny(true);
+        ModelAndView model;
+        if (nazwa.isEmpty()) {
+            model = new ModelAndView("editLekPage");
+            model.addObject("error", "Nazwa leku jest pusta");
+            model.addObject("lek_id", lekId);
+        } else if ((!NumberUtils.isNumber(cena))) {
+            model = new ModelAndView("editLekPage");
+            model.addObject("lek_id", lekId);
+            model.addObject("error", "Cena nie jest liczbą");
         } else {
-            item.setCzyDostepny(false);
+            Lek item = service.getLekById(Integer.parseInt(lekId));
+            item.setLekName(nazwa);
+            item.setCena(Double.valueOf(cena));
+
+            if (dostepnosc.equals("tak")) {
+                item.setCzyDostepny(true);
+            } else {
+                item.setCzyDostepny(false);
+            }
+
+            service.updateLek(item);
+            model = new ModelAndView("redirect:/user/lekListPage.html");
         }
+        User user = service.getUserByUserName(principal.getName());
+        model.addObject("user", user);
 
-        service.updateLek(item);
+        return model;
+    }
 
-        ModelAndView model = new ModelAndView("redirect:/user/lekListPage.html");
+    @RequestMapping(value = "/user/afteraddingLek", method = RequestMethod.POST)
+    public ModelAndView afterAddingLek(Principal principal,
+                                       @RequestParam("nazwa") String nazwa,
+                                       @RequestParam("cena") String cena,
+                                       @RequestParam("dostepnosc") String dostepnosc,
+                                       @RequestParam("choroba") String chorobas_id
+    ) {
+        ModelAndView model;
+        if (nazwa.isEmpty()) {
+            model = new ModelAndView("addLekPage");
+            model.addObject("error", "Nazwa leku jest pusta");
+            model.addObject("choroba", service.listChoroba());
+        } else if ((!NumberUtils.isNumber(cena))) {
+            model = new ModelAndView("addLekPage");
+            model.addObject("error", "Cena nie jest liczbą");
+            model.addObject("choroba", service.listChoroba());
+        } else {
+            Lek item = new Lek();
+            item.setLekName(nazwa);
+            item.setCena(Double.valueOf(cena));
 
+            if (dostepnosc.equals("tak")) {
+                item.setCzyDostepny(true);
+            } else {
+                item.setCzyDostepny(false);
+            }
+
+            Choroba choroba = service.getChorobaID(Integer.parseInt(chorobas_id));
+            item.getChorobas().add(choroba);
+            choroba.setLek(item);
+            service.updateChorobaToDB(choroba);
+
+            model = new ModelAndView("redirect:/user/lekListPage.html");
+        }
+        User user = service.getUserByUserName(principal.getName());
+        model.addObject("user", user);
         return model;
     }
 
@@ -119,17 +172,17 @@ public class PoradnikFarmaceutycznyController {
         return "addChorobaPage";
     }
 
+
     @RequestMapping(value = "/user/addLekPage.html", method = RequestMethod.GET)
     public String addLek(Model model, Principal principal) {
         User user = service.getUserByUserName(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("nazwa", "");
         model.addAttribute("cena", "");
         model.addAttribute("dostepnosc", "");
         model.addAttribute("choroba", service.listChoroba());
-        model.addAttribute("user", user);
         return "addLekPage";
     }
-
 
     @RequestMapping(value = "/user/afteraddingItem.html", method = RequestMethod.POST)
     public ModelAndView afterAddingChoroba(Principal principal,
@@ -155,32 +208,6 @@ public class PoradnikFarmaceutycznyController {
         return model;
     }
 
-    @RequestMapping(value = "/user/afteraddingLek", method = RequestMethod.POST)
-    public ModelAndView afterAddingLek(Principal principal,
-                                       @RequestParam("nazwa") String nazwa,
-                                       @RequestParam("cena") String cena,
-                                       @RequestParam("dostepnosc") String dostepnosc,
-                                       @RequestParam("choroba") String chorobas_id
-    ) {
-        Lek item = new Lek();
-        item.setLekName(nazwa);
-        item.setCena(Double.valueOf(cena));
-
-        if (dostepnosc.equals("tak")) {
-            item.setCzyDostepny(true);
-        } else {
-            item.setCzyDostepny(false);
-        }
-
-        Choroba choroba = service.getChorobaID(Integer.parseInt(chorobas_id));
-        item.getChorobas().add(choroba);
-        choroba.setLek(item);
-        service.updateChorobaToDB(choroba);
-
-        ModelAndView model = new ModelAndView("redirect:/user/lekListPage.html");
-        return model;
-    }
-
     @RequestMapping(value = "/user/aftereditingItem", method = RequestMethod.POST)
     public ModelAndView afterEditingChoroba(Principal principal,
                                             @RequestParam("kategoriaChoroby") String kategoriaChorobyId,
@@ -189,6 +216,7 @@ public class PoradnikFarmaceutycznyController {
                                             @RequestParam("choroba_id") String chorobaId,
                                             @RequestParam("nazwa") String nazwa
     ) {
+
         Choroba item = service.getChorobaID(Integer.parseInt(chorobaId));
 
         item.setNazwa(nazwa);
@@ -205,6 +233,7 @@ public class PoradnikFarmaceutycznyController {
         service.updateChorobaToDB(item);
 
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
+
         return model;
     }
 

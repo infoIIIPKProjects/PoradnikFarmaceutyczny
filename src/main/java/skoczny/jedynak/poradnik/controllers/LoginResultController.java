@@ -78,7 +78,7 @@ public class LoginResultController {
                 model.addObject("error", errorValue);
             } else {
                 Role role = new Role();
-                role.setId(idRoles.get("lekarz"));
+                role.setId(idRoles.get("admin"));
                 user.setRole(role);
                 service.addUserToDB(user);
                 model = new ModelAndView("redirect:/");

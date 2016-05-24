@@ -87,6 +87,11 @@
             </li>
         </ul>
     </div>
+    <div class="error">
+        <c:if test="${not empty error}">
+            <c:out value="${error}"></c:out>
+        </c:if>
+    </div>
     <div class="form-wrapper">
         <form method="post" action="/user/afteraddingLek.html">
             <div class="item">
