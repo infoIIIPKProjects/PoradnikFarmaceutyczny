@@ -152,8 +152,11 @@ public class PoradnikFarmaceutycznyDAOImpl implements PoradnikFarmaceutycznyDAO 
     }
 
     @Override
-    public boolean isInSession(Choroba choroba){
-        Session session = this.sessionFactory.getCurrentSession();
-        return session.contains(choroba.getId());
+    public boolean isInSession(String name) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from User where name= :name ");
+        query.setString("name", name);
+        User user = (User) query.uniqueResult();
+        return user != null;
     }
 }

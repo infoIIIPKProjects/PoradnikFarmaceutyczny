@@ -57,3 +57,14 @@
     font-family: 'doctor';
     src: url('/resources/static/fonts/Doctor.ttf');
 }
+
+.register-page-wrapper .error{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    width: 259px;
+}

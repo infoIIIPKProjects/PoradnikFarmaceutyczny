@@ -10,6 +10,11 @@
     <div class="menu">
         <div class="title">REJESTRACJA DO SYSTEMU</div>
     </div>
+    <div class="error">
+    <c:if test="${not empty error}">
+            <c:out value="${error}"></c:out>
+    </c:if>
+    </div>
 
     <div class="register-form">
         <form action="register" method="post">

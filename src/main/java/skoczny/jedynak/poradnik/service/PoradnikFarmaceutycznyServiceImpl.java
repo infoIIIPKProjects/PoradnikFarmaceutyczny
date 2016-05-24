@@ -44,8 +44,8 @@ public class PoradnikFarmaceutycznyServiceImpl implements PoradnikFarmaceutyczny
 
     @Override
     @Transactional
-    public boolean isInSession(Choroba choroba) {
-        return poradnikFarmaceutycznyDAO.isInSession(choroba);
+    public boolean isInSession(String userName) {
+        return poradnikFarmaceutycznyDAO.isInSession(userName);
     }
 
     @Override

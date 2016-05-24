@@ -20,6 +20,9 @@ import java.util.Map;
 
 @Controller
 public class LoginResultController {
+    private static final String PASSWORD_PATTERN =
+            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})";
+
     private static Map<String, Integer> idRoles = new HashMap<String, Integer>() {{
         put("lekarz", 1);
         put("aptekarz", 2);
@@ -27,6 +30,7 @@ public class LoginResultController {
         put("kierownictwo", 4);
         put("admin", 5);
     }};
+
     @Autowired(required = true)
     @Qualifier(value = "poradnikFarmaceutycznyService")
     private PoradnikFarmaceutycznyService service;
@@ -60,18 +64,30 @@ public class LoginResultController {
         User userForm = new User();
         ModelAndView model = new ModelAndView("registerPage");
         model.addObject("userForm", userForm);
-
         return model;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public ModelAndView processRegistration(@ModelAttribute("userForm") User user) {
-        Role role = new Role();
-        role.setId(idRoles.get("admin"));
-        user.setRole(role);
-        service.addUserToDB(user);
-
-        ModelAndView model = new ModelAndView("redirect:/");
+    public ModelAndView processRegistration(@ModelAttribute("userForm") User user, String errorValue) {
+        ModelAndView model;
+        boolean exists = service.isInSession(user.getName());
+        if (!exists) {
+            if (!user.getPassword().matches(PASSWORD_PATTERN)) {
+                errorValue = "Hasło musi mieć co najmniej 6 znaków, 1 wielką litere, 1 małą literę i 1 cyfrę.";
+                model = new ModelAndView("registerPage");
+                model.addObject("error", errorValue);
+            } else {
+                Role role = new Role();
+                role.setId(idRoles.get("lekarz"));
+                user.setRole(role);
+                service.addUserToDB(user);
+                model = new ModelAndView("redirect:/");
+            }
+        } else {
+            errorValue = "Użytkownik o takim loginie już istnieje.\n wybierz inną nazwę";
+            model = new ModelAndView("registerPage");
+            model.addObject("error", errorValue);
+        }
         return model;
     }
 }

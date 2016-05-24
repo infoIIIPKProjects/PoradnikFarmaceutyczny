@@ -38,5 +38,5 @@ public interface PoradnikFarmaceutycznyService {
 
     void addUserToDB(User user);
 
-    boolean isInSession(Choroba choroba);
+    boolean isInSession(String userName);
 }
