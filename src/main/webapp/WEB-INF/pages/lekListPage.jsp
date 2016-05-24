@@ -116,7 +116,12 @@
                 <tr>
                     <td>${lek.lekName}</td>
                     <td>${lek.cena}</td>
-                    <td>${lek.czyDostepny}</td>
+                    <c:if test="${lek.czyDostepny}">
+                        <td>tak</td>
+                    </c:if>
+                    <c:if test="${!lek.czyDostepny}">
+                        <td>nie</td>
+                    </c:if>
                     <td>${lek.chorobas}</td>
                     <c:choose>
                         <c:when test="${user.role.roleName.equals('admin')}">
