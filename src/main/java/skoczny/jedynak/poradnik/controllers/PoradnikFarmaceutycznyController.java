@@ -91,6 +91,7 @@ public class PoradnikFarmaceutycznyController {
                                         @RequestParam("cena") String cena,
                                         @RequestParam("dostepnosc") String dostepnosc
     ) {
+        Lek item = service.getLekById(Integer.parseInt(lekId));
         ModelAndView model;
         if (nazwa.isEmpty()) {
             model = new ModelAndView("editLekPage");
@@ -101,7 +102,7 @@ public class PoradnikFarmaceutycznyController {
             model.addObject("lek_id", lekId);
             model.addObject("error", "Cena nie jest liczbą");
         } else {
-            Lek item = service.getLekById(Integer.parseInt(lekId));
+
             item.setLekName(nazwa);
             item.setCena(Double.valueOf(cena));
 
@@ -110,12 +111,12 @@ public class PoradnikFarmaceutycznyController {
             } else {
                 item.setCzyDostepny(false);
             }
-
             service.updateLek(item);
             model = new ModelAndView("redirect:/user/lekListPage.html");
         }
         User user = service.getUserByUserName(principal.getName());
         model.addObject("user", user);
+        model.addObject("lek",item);
 
         return model;
     }

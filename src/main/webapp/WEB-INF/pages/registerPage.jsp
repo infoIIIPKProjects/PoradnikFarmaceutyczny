@@ -18,8 +18,8 @@
 
     <div class="register-form">
         <form action="register" method="post">
-            <input id="name" name="name" type="text" placeholder="name"/><br>
-            <input id="password" name="password" type="password" placeholder="password"/><br>
+            <input id="name" name="name" type="text" placeholder="login"/><br>
+            <input id="password" name="password" type="password" placeholder="hasło"/><br>
             <input type="submit" value="Zarejestruj"/>
         </form>
     </div>

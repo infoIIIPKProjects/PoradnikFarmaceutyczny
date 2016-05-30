@@ -20,7 +20,7 @@ public class Lek {
     @Column(name = "dostepnosc")
     private boolean czyDostepny;
 
-    @OneToMany(mappedBy = "lek", fetch = FetchType.EAGER, orphanRemoval = true,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "lek", fetch = FetchType.EAGER, orphanRemoval = true,cascade = CascadeType.DETACH)
     private Collection<Choroba> chorobas = new ArrayList<Choroba>();
 
     public Collection<Choroba> getChorobas() {

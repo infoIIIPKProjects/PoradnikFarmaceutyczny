@@ -37,6 +37,9 @@
 }
 
 .login-form input[type="submit"] {
+    font-family: doctor;
+    font-weight: bold;
+    font-size: 19px;
     width: 248px;
     color: #0f71ba;
     letter-spacing: .05em;
@@ -49,6 +52,7 @@
     width: 248px;
     color: #0f71ba;
     letter-spacing: .05em;
+    background-color: #CCCC9A;
 }
 
 .error{

@@ -9,7 +9,7 @@ public class Choroba {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "lek_id")
     private Lek lek;
 
