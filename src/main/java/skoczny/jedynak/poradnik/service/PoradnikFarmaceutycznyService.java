@@ -39,4 +39,9 @@ public interface PoradnikFarmaceutycznyService {
     void addUserToDB(User user);
 
     boolean isInSession(String userName);
+
+    List<User> listUsers();
+    void updateUserToDB(User user);
+
+    void removeUser(User user);
 }

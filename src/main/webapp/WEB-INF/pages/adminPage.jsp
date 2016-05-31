@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/resources/static/css/form.css">
 </head>
 <body>
-
 <div class="page-wrapper">
     <div id="menu" class="menu">
         <ul class="items">
@@ -94,42 +93,31 @@
             </li>
         </ul>
     </div>
-    <div class="form-wrapper">
-        <form method="post" action="/user/aftereditingItem.html">
-            <input type="hidden" name="choroba_id" value="${choroba_id}">
+    <div class="form-wrapper" >
+        <form method="post" action="/user/afterAddUser.html">
             <div class="item">
-                <div>Nazwa choroby</div>
-                <input type="text" value="${choroba.nazwa}" name="nazwa"/>
-            </div>
-            <div class="item">
-                <div>Wybierz kategorie choroby:</div>
-                <select name="kategoriaChoroby">
-                    <option value="${choroba.kategoriaChoroby.id}"
-                            selected>${choroba.kategoriaChoroby}</option>
-                    <c:forEach var="category" items="${kategoriaChoroby}">
-                        <c:if test="${category.id ne choroba.kategoriaChoroby.id}">
-                            <option value="${category.id}">${category}</option>
-                        </c:if>
+                <div>User</div>
+                <select name="user">
+                    <c:forEach var="user" items="${users}">
+                        <option value="${user.name}">${user.name}</option>
                     </c:forEach>
                 </select>
             </div>
-            <div class="item wide">
-                <div>Opis choroby:</div>
-                <input type="text" name="description" value="${choroba.description}"/>
-            </div>
             <div class="item">
-                <div>Lek:</div>
-                <select name="lek">
-                    <option value="${choroba.lek.id}" selected>${choroba.lek}</option>
-                    <c:forEach var="lek" items="${lek}">
-                        <c:if test="${lek.id ne choroba.lek.id}">
-                            <option value="${lek.id}">${lek}</option>
-                        </c:if>
+                <div>Rola</div>
+                <select name="role">
+                    <c:forEach var="role" items="${roles}">
+                        <option value="${role}">${role}</option>
                     </c:forEach>
                 </select>
             </div>
             <div class="button">
-                <button>Edytuj
+                <button name= "updateOrDelete"   value="Delete">Usuń użytkownika
+                    <input type="submit"  hidden/>
+                </button>
+            </div>
+            <div class="button" >
+                <button name = "updateOrDelete"  value="Update">Zmień role użytkownika
                     <input type="submit" hidden/>
                 </button>
             </div>
@@ -137,6 +125,7 @@
     </div>
     <div id="greeting" class="greeting"></div>
 </div>
+
 </body>
 <script src="/resources/static/js/date.js"></script>
 </html>

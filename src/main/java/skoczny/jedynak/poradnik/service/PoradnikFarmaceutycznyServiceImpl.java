@@ -1,5 +1,6 @@
 package skoczny.jedynak.poradnik.service;
 
+import org.hibernate.Session;
 import skoczny.jedynak.poradnik.dao.PoradnikFarmaceutycznyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,5 +120,23 @@ public class PoradnikFarmaceutycznyServiceImpl implements PoradnikFarmaceutyczny
     @Transactional
     public List<Object[]> getUserKategoriaChorobyByDate(int id, String fromDate, String toDate) {
         return poradnikFarmaceutycznyDAO.getUserKategoriaChorobyByDate(id, fromDate, toDate);
+    }
+
+    @Override
+    @Transactional
+    public List<User> listUsers() {
+        return poradnikFarmaceutycznyDAO.listUsers();
+    }
+
+    @Override
+    @Transactional
+    public void updateUserToDB(User user) {
+        poradnikFarmaceutycznyDAO.updateUserToDB(user);
+    }
+
+    @Override
+    @Transactional
+    public void removeUser(User user){
+        poradnikFarmaceutycznyDAO.removeUser(user);
     }
 }

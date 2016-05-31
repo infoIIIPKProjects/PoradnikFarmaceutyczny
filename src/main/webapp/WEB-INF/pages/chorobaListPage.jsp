@@ -92,6 +92,13 @@
                 </c:otherwise>
             </c:choose>
 
+            <c:if test="${user.role.roleName.equals(\"admin\")}">
+                <li class="item admin-panel">
+                    <a href="/user/adminPage.html">
+                        <span>Panel Admina</span></a>
+                </li>
+            </c:if>
+
             <li class="item right">
                 <a href="<c:url value="/j_spring_security_logout"/>">
                     <span>Wyloguj</span></a>

@@ -23,7 +23,7 @@ public class LoginResultController {
     private static final String PASSWORD_PATTERN =
             "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})";
 
-    private static Map<String, Integer> idRoles = new HashMap<String, Integer>() {{
+    public static Map<String, Integer> idRoles = new HashMap<String, Integer>() {{
         put("lekarz", 1);
         put("aptekarz", 2);
         put("magazyn", 3);

@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import skoczny.jedynak.poradnik.dataview.ChartDrawer;
-import skoczny.jedynak.poradnik.model.Choroba;
-import skoczny.jedynak.poradnik.model.KategoriaChoroby;
-import skoczny.jedynak.poradnik.model.Lek;
-import skoczny.jedynak.poradnik.model.User;
+import skoczny.jedynak.poradnik.model.*;
 import skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyService;
 
 import java.security.Principal;
@@ -68,6 +65,7 @@ public class PoradnikFarmaceutycznyController {
         return "editLekPage";
     }
 
+
     @RequestMapping(value = {"/user/editChorobaPage{id}"}, method = RequestMethod.GET)
     public String updateChoroba(@PathVariable String id, Model model, Principal principal) {
         Choroba choroba = service.getChorobaID(Integer.parseInt(id));
@@ -82,6 +80,36 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("opis", choroba.getDescription());
 
         return "editChorobaPage";
+    }
+
+    @RequestMapping(value = {"/user/adminPage.html"}, method = RequestMethod.GET)
+    public String updateUser(Model model, Principal principal) {
+        User user = service.getUserByUserName(principal.getName());
+        List<User> users = service.listUsers();
+        List<String> roles = new ArrayList<String>();
+        roles.addAll(LoginResultController.idRoles.keySet());
+        model.addAttribute("users", users);
+        model.addAttribute("roles", roles);
+        model.addAttribute("user", user);
+        return "adminPage";
+    }
+
+    @RequestMapping(value = "/user/afterAddUser.html", method = RequestMethod.POST)
+    public ModelAndView afterAddingUser(Principal principal,
+                                        @RequestParam("role") String roleName,
+                                        @RequestParam("user") String userName,
+                                        @RequestParam(value = "updateOrDelete") String updateOrDelete) {
+        User user = service.getUserByUserName(userName);
+        if (updateOrDelete.equals("Update")) {
+            Role role = user.getRole();
+            role.setRoleName(roleName);
+            role.setId(LoginResultController.idRoles.get(roleName));
+            user.setRole(role);
+            service.updateUserToDB(user);
+        } else if(updateOrDelete.equals("Delete")) {
+            service.removeUser(user);
+        }
+        return new ModelAndView("redirect:chorobaListPage.html");
     }
 
     @RequestMapping(value = "/user/aftereditingLek", method = RequestMethod.POST)
@@ -116,7 +144,7 @@ public class PoradnikFarmaceutycznyController {
         }
         User user = service.getUserByUserName(principal.getName());
         model.addObject("user", user);
-        model.addObject("lek",item);
+        model.addObject("lek", item);
 
         return model;
     }

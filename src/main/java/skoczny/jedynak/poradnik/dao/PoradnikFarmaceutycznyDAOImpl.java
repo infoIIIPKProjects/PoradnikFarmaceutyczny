@@ -1,14 +1,16 @@
 package skoczny.jedynak.poradnik.dao;
 
-import skoczny.jedynak.poradnik.comparators.ChorobaComparator;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import skoczny.jedynak.poradnik.model.*;
+import org.springframework.transaction.annotation.Transactional;
+import skoczny.jedynak.poradnik.model.Choroba;
+import skoczny.jedynak.poradnik.model.KategoriaChoroby;
+import skoczny.jedynak.poradnik.model.Lek;
+import skoczny.jedynak.poradnik.model.User;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +50,12 @@ public class PoradnikFarmaceutycznyDAOImpl implements PoradnikFarmaceutycznyDAO 
     public void addUserToDB(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(user);
+    }
+
+    @Override
+    public void updateUserToDB(User user) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.update(user);
     }
 
     @Override
@@ -142,6 +150,16 @@ public class PoradnikFarmaceutycznyDAOImpl implements PoradnikFarmaceutycznyDAO 
     }
 
     @Override
+    @Transactional
+    public void removeUser(User user){
+        Session session = this.sessionFactory.getCurrentSession();
+        User tempUser = (User) session.load(User.class, new Integer(user.getId()));
+        if (null != tempUser) {
+            session.delete(tempUser);
+        }
+    }
+
+    @Override
     public List<Object[]> getUserKategoriaChorobyByDate(int id, String fromDate, String toDate) {
         Session session = this.sessionFactory.getCurrentSession();
         SQLQuery query = session.createSQLQuery("select kategoriaChoroby.name, sum(choroba.amount) from kategoriaChoroby inner join " +
@@ -158,5 +176,13 @@ public class PoradnikFarmaceutycznyDAOImpl implements PoradnikFarmaceutycznyDAO 
         query.setString("name", name);
         User user = (User) query.uniqueResult();
         return user != null;
+    }
+
+    @Override
+    public List<User> listUsers() {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<User> users = session.createQuery("from User ").list();
+        users.size();
+        return users;
     }
 }
