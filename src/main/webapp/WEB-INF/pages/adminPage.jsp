@@ -82,7 +82,7 @@
 
             <c:if test="${user.role.roleName.equals(\"admin\")}">
                 <li class="item admin-panel">
-                    <a href="/user/adminPage.html">
+                    <a href="/admin/adminPage.html">
                         <span>Panel Admina</span></a>
                 </li>
             </c:if>
