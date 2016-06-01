@@ -40,9 +40,9 @@ public class ChartDrawer {
         JFreeChart chart;
         if (is3D) {
             chart = ChartFactory.createPieChart3D(
-                    tytul, // chart title
-                    dataset, // data
-                    legend, // include legend
+                    tytul,
+                    dataset,
+                    legend,
                     false,
                     false);
 
@@ -53,9 +53,9 @@ public class ChartDrawer {
             plot.setNoDataMessage("No data to display");
         } else {
             chart = ChartFactory.createPieChart(
-                    tytul, // chart title
-                    dataset, // data
-                    legend, // include legend
+                    tytul,
+                    dataset,
+                    legend,
                     false,
                     false);
         }
@@ -63,8 +63,7 @@ public class ChartDrawer {
         int width = 620;
         int height = 430;
 
-        String imageUri = getImageUri(chart, width, height);
-        return imageUri;
+        return getImageUri(chart, width, height);
     }
 
     private static String getImageUri(JFreeChart chart, int width, int height) {
@@ -94,7 +93,7 @@ public class ChartDrawer {
                 podTytulX, podTytulY,
                 dataset, PlotOrientation.VERTICAL,
                 false, false, false);
-///////////////
+
         CategoryPlot plot = barChart.getCategoryPlot();
         plot.setBackgroundPaint(Color.lightGray);
         plot.setDomainGridlinePaint(Color.white);
@@ -116,12 +115,11 @@ public class ChartDrawer {
         renderer.setPositiveItemLabelPosition(new ItemLabelPosition(
                 ItemLabelAnchor.CENTER, TextAnchor.CENTER, TextAnchor.CENTER,
                 - Math.PI / 2));
-//////////////
+
         int width = 1900;
         int height = 380;
 
-        String imageUri = getImageUri(barChart, width, height);
-        return imageUri;
+        return getImageUri(barChart, width, height);
     }
 
     public static String createLineChartImageURIFromData(Map<String, Double> categories, String tytul, String podTytulX, String podTytulY) {
@@ -140,7 +138,6 @@ public class ChartDrawer {
         int width = 620;
         int height = 430;
 
-        String imageUri = getImageUri(lineChartObject, width, height);
-        return imageUri;
+        return getImageUri(lineChartObject, width, height);
     }
 }

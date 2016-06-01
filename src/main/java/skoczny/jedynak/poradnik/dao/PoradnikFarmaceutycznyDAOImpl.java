@@ -160,16 +160,6 @@ public class PoradnikFarmaceutycznyDAOImpl implements PoradnikFarmaceutycznyDAO 
     }
 
     @Override
-    public List<Object[]> getUserKategoriaChorobyByDate(int id, String fromDate, String toDate) {
-        Session session = this.sessionFactory.getCurrentSession();
-        SQLQuery query = session.createSQLQuery("select kategoriaChoroby.name, sum(choroba.amount) from kategoriaChoroby inner join " +
-                "choroba on kategoriaChoroby.id = choroba.kategoriaChoroby_id " +
-                "where user_id=" + id + " and date(choroba.date) between '2000-01-01' and '2020-01-01' group by kategoriaChoroby.id");
-        List<Object[]> categories = query.list();
-        return categories;
-    }
-
-    @Override
     public boolean isInSession(String name) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from User where name= :name ");

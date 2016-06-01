@@ -1,6 +1,9 @@
 package skoczny.jedynak.poradnik.service;
 
-import skoczny.jedynak.poradnik.model.*;
+import skoczny.jedynak.poradnik.model.Choroba;
+import skoczny.jedynak.poradnik.model.KategoriaChoroby;
+import skoczny.jedynak.poradnik.model.Lek;
+import skoczny.jedynak.poradnik.model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -32,9 +35,7 @@ public interface PoradnikFarmaceutycznyService {
 
     void removeChorobaByID(int id);
 
-
     void updateChorobaToDB(Choroba choroba);
-     List<Object[]> getUserKategoriaChorobyByDate(int id, String fromDate, String toDate);
 
     void addUserToDB(User user);
 

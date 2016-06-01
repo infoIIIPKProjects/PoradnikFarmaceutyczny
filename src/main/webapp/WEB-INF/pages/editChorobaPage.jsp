@@ -95,7 +95,7 @@
         </ul>
     </div>
     <div class="form-wrapper">
-        <form method="post" action="/user/aftereditingItem.html">
+        <form method="post" action="/user/afterEditingChoroba.html">
             <input type="hidden" name="choroba_id" value="${choroba_id}">
             <div class="item">
                 <div>Nazwa choroby</div>

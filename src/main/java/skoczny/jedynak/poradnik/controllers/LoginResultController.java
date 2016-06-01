@@ -1,35 +1,32 @@
 package skoczny.jedynak.poradnik.controllers;
 
+import com.google.common.collect.ImmutableMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import skoczny.jedynak.poradnik.model.Choroba;
 import skoczny.jedynak.poradnik.model.Role;
 import skoczny.jedynak.poradnik.model.User;
 import skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class LoginResultController {
     private static final String PASSWORD_PATTERN =
             "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})";
 
-    public static Map<String, Integer> idRoles = new HashMap<String, Integer>() {{
-        put("lekarz", 1);
-        put("aptekarz", 2);
-        put("magazyn", 3);
-        put("kierownictwo", 4);
-        put("admin", 5);
-    }};
+    public static ImmutableMap<String, Integer> idRoles = new ImmutableMap.Builder<String, Integer>()
+            .put("lekarz", 1)
+            .put("aptekarz", 2)
+            .put("magazyn", 3)
+            .put("kierownictwo", 4)
+            .put("admin", 5).build();
 
     @Autowired(required = true)
     @Qualifier(value = "poradnikFarmaceutycznyService")
@@ -78,7 +75,7 @@ public class LoginResultController {
                 model.addObject("error", errorValue);
             } else {
                 Role role = new Role();
-                role.setId(idRoles.get("admin"));
+                role.setId(idRoles.get("aptekarz"));
                 user.setRole(role);
                 service.addUserToDB(user);
                 model = new ModelAndView("redirect:/");

@@ -34,8 +34,6 @@ public interface PoradnikFarmaceutycznyDAO {
 
     void updateChorobaToDB(Choroba choroba);
 
-    public List<Object[]> getUserKategoriaChorobyByDate(int id, String fromDate, String toDate);
-
     void addUserToDB(User user);
 
     boolean isInSession(String userName);

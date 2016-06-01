@@ -17,10 +17,6 @@ public class User {
     private String password;
     private String email;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "default_report_date")
-    private Date defaultReportDate;
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -65,14 +61,6 @@ public class User {
         this.email = email;
     }
 
-    public Date getDefaultReportDate() {
-        return defaultReportDate;
-    }
-
-    public void setDefaultReportDate(Date defaultReportDate) {
-        this.defaultReportDate = defaultReportDate;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -80,7 +68,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", defaultReportDate=" + defaultReportDate +
                 ", role=" + role +
                 '}';
     }

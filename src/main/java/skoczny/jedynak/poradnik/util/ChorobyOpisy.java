@@ -1,4 +1,4 @@
-package skoczny.jedynak.poradnik.service;
+package skoczny.jedynak.poradnik.util;
 
 /**
  * Created by Damian on 2016-01-16.
@@ -38,7 +38,7 @@ public class ChorobyOpisy {
     final static public String zakazenie = "Wiele roznych wirusow i bakterii wywoluje pierwotne choroby obejmujace drogi oddechowe. Dochodzi do nich w wyniku zaburzen mechanizmow obronnych organizmu, np. w wyniku przemeczenia, przegrzania lub tez przeziebienia. Czesto rowniez mamy do czynienia z wtornymi zakazeniami bakteryjnymi w przebiegu infekcji poczatkowo wirusowej. Szczegolnie narazone na nadkazenia sa niemowleta i male dzieci, u ktorych zakazenia wirusowe prowadza do rozleglego uszkodzenia blony sluzowej, uposledzaja odpornosc miejscowa w obrebie ukladu oddechowego, stwarzajac dogodne warunki do wtornego namnazania sie bakterii.";
     final static public String alzheimer = "najczestsza postac otepienia, nieuleczalna i postepujaca choroba neurodegeneracyjna, prowadzaca do smierci pacjenta.";
     final static public String przeziebienie = " wirusowa choroba zakazna gornych drog oddechowych ze szczegolnie nasilonymi objawami w obrebie nosa. ";
-    final static public String niedoborWapnia = "Hipokalcemia objawia sie miedzy innymi pobudliwoscia nerwowo–miesniowa, uczuciem dretwienia konczyn i okolicy ust, zaburzeniem odruchow nerwowych, skurczami miesni, tezyczka lub drgawkami. Moze byc takze przyczyna zaburzen rytmu serca.";
+    final static public String niedoborWapnia = "Hipokalcemia objawia sie miedzy innymi pobudliwoscia nerwowoï¿½miesniowa, uczuciem dretwienia konczyn i okolicy ust, zaburzeniem odruchow nerwowych, skurczami miesni, tezyczka lub drgawkami. Moze byc takze przyczyna zaburzen rytmu serca.";
     final static public String grzybicaSkory = grzybica;
     final static public String grypa = " ostra choroba zakazna ukladu oddechowego wywolana zakazeniem wirusem grypy.";
     final static public String refluks = "chorzenie, polegajace na nieprawidlowym cofaniu sie kwasnej tresci zoladkowej do przelyku, z powodu niesprawnosci zwieracza dolnego przelyku";
@@ -49,7 +49,7 @@ public class ChorobyOpisy {
     final static public String nosAlergia = "Alergiczne zapalenie blony sluzowej nosa (AZBsN) jest choroba, ktorej przyczyna jest mediowana przez IgE reakcja atopowa w obrebie blony sluzowej nosa rozwijajaca sie po ekspozycji alergenowej.";
     final static public String katar = "pojecie dotyczace objawow zapalenia blony sluzowej nosa (niekiedy takze zatok przynosowych). Do objawow naleza: kichanie, drapanie (swiad w nosie i gardle, kaszel, pieczenie spojowek, wyciek plynnej wydzieliny z nosa, lub jej splywanie po tylnej scianie gardla, zatkany nos, ogolne oslabienie, bol glowy, stan podgoraczkowy. Niezyt nosa diagnozuje sie, gdy objawy te trwaja przez dwa lub wiecej kolejnych dni oraz dluzej niz jedna godzine przez wiekszosc tych dni";
     final static public String zaburzeniaFlory = " zespol chorobowy przebiegajacy z nadmiernym rozrostem w jelicie czczym flory bakteryjnej typowej dla jelita grubego, ktory powoduje zaburzenia trawienia oraz wchlaniania pokarmow, a zwlaszcza tluszczow i witaminy B12.";
-    final static public String zapalanie = "zwane wypryskiem atopowym, egzema, a niegdys swierzbiaczka (lac. prurigo) Besniera, wypryskiem alergicznym lub alergicznym zapaleniem skory, w dermatologii i alergologii okreslane jako przewlekla dermatoza (zapalna) – przebiegajaca z okresami zaostrzen i remisji choroba skory, ktorej towarzyszy uporczywy i nawrotowy swiad oraz liszajowacenie skory[1].";
+    final static public String zapalanie = "zwane wypryskiem atopowym, egzema, a niegdys swierzbiaczka (lac. prurigo) Besniera, wypryskiem alergicznym lub alergicznym zapaleniem skory, w dermatologii i alergologii okreslane jako przewlekla dermatoza (zapalna) ï¿½ przebiegajaca z okresami zaostrzen i remisji choroba skory, ktorej towarzyszy uporczywy i nawrotowy swiad oraz liszajowacenie skory[1].";
     final static public String zapalanieInt = "druga, po bakteryjnym zapaleniu pochwy, najczestsza przyczyna infekcji drog moczowo-plciowych kobiety.";
     final static public String zapWatroby = "grupa chorob watroby o roznej etiologii, ktorych wspolnym mianownikiem jest stan zapalny tego narzadu.";
     final static public String wit = "schorzenie polegajace na calkowitym braku lub znaczacym niedoborze witaminy[1] lub ich zestawu w organizmie. Powoduje roznorodne zaklocenia przemiany materii z objawami charakterystycznymi dla poszczegolnych witamin.";

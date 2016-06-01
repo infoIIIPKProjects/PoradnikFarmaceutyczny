@@ -118,12 +118,6 @@ public class PoradnikFarmaceutycznyServiceImpl implements PoradnikFarmaceutyczny
 
     @Override
     @Transactional
-    public List<Object[]> getUserKategoriaChorobyByDate(int id, String fromDate, String toDate) {
-        return poradnikFarmaceutycznyDAO.getUserKategoriaChorobyByDate(id, fromDate, toDate);
-    }
-
-    @Override
-    @Transactional
     public List<User> listUsers() {
         return poradnikFarmaceutycznyDAO.listUsers();
     }

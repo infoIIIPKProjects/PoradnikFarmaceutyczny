@@ -82,7 +82,7 @@ public class PoradnikFarmaceutycznyController {
         return "editChorobaPage";
     }
 
-    @RequestMapping(value = {"/user/adminPage.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/admin/adminPage.html"}, method = RequestMethod.GET)
     public String updateUser(Model model, Principal principal) {
         User user = service.getUserByUserName(principal.getName());
         List<User> users = service.listUsers();
@@ -106,13 +106,13 @@ public class PoradnikFarmaceutycznyController {
             role.setId(LoginResultController.idRoles.get(roleName));
             user.setRole(role);
             service.updateUserToDB(user);
-        } else if(updateOrDelete.equals("Delete")) {
+        } else if (updateOrDelete.equals("Delete")) {
             service.removeUser(user);
         }
         return new ModelAndView("redirect:chorobaListPage.html");
     }
 
-    @RequestMapping(value = "/user/aftereditingLek", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/afterEditingLek", method = RequestMethod.POST)
     public ModelAndView afterEditingLek(Principal principal,
                                         @RequestParam("nazwa") String nazwa,
                                         @RequestParam("lek_id") String lekId,
@@ -149,7 +149,7 @@ public class PoradnikFarmaceutycznyController {
         return model;
     }
 
-    @RequestMapping(value = "/user/afteraddingLek", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/afterAddingLek", method = RequestMethod.POST)
     public ModelAndView afterAddingLek(Principal principal,
                                        @RequestParam("nazwa") String nazwa,
                                        @RequestParam("cena") String cena,
@@ -180,7 +180,6 @@ public class PoradnikFarmaceutycznyController {
             item.getChorobas().add(choroba);
             choroba.setLek(item);
             service.updateChorobaToDB(choroba);
-
             model = new ModelAndView("redirect:/user/lekListPage.html");
         }
         User user = service.getUserByUserName(principal.getName());
@@ -190,14 +189,12 @@ public class PoradnikFarmaceutycznyController {
 
     @RequestMapping(value = "/user/addChorobaPage.html", method = RequestMethod.GET)
     public String addChoroba(Model model, Principal principal) {
-
         User user = service.getUserByUserName(principal.getName());
         model.addAttribute("nazwa", "");
         model.addAttribute("user", user);
         model.addAttribute("lek", service.listLeki());
         model.addAttribute("kategoriaChoroby", service.listCategories());
         model.addAttribute("opis", "");
-
         return "addChorobaPage";
     }
 
@@ -213,7 +210,7 @@ public class PoradnikFarmaceutycznyController {
         return "addLekPage";
     }
 
-    @RequestMapping(value = "/user/afteraddingItem.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/afterAddingChoroba.html", method = RequestMethod.POST)
     public ModelAndView afterAddingChoroba(Principal principal,
                                            @RequestParam("kategoriaChoroby") String kategoriaChorobyId,
                                            @RequestParam("lek") String lekId,
@@ -233,11 +230,10 @@ public class PoradnikFarmaceutycznyController {
 
         service.addChorobaToDB(item);
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
-
         return model;
     }
 
-    @RequestMapping(value = "/user/aftereditingItem", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/afterEditingChoroba", method = RequestMethod.POST)
     public ModelAndView afterEditingChoroba(Principal principal,
                                             @RequestParam("kategoriaChoroby") String kategoriaChorobyId,
                                             @RequestParam("lek") String lekId,
@@ -247,7 +243,6 @@ public class PoradnikFarmaceutycznyController {
     ) {
 
         Choroba item = service.getChorobaID(Integer.parseInt(chorobaId));
-
         item.setNazwa(nazwa);
 
         KategoriaChoroby kategoriaChoroby = service.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
@@ -262,7 +257,6 @@ public class PoradnikFarmaceutycznyController {
         service.updateChorobaToDB(item);
 
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
-
         return model;
     }
 
@@ -320,7 +314,6 @@ public class PoradnikFarmaceutycznyController {
                 counter++;
             }
         }
-
         dostepnoscLekow.put("dostepne", (double) counter);
         dostepnoscLekow.put("nie dostepne", (double) (iloscLekow - counter));
         return dostepnoscLekow;
@@ -328,8 +321,8 @@ public class PoradnikFarmaceutycznyController {
 
     private Map<String, Double> prepareDataForKategorieChorob(List<Choroba> kategoriaChorobies) {
         Map<String, Double> kategorieIlosc = new HashMap<>();
-        for (int i = 0; i < kategoriaChorobies.size(); i++) {
-            String nazwa = kategoriaChorobies.get(i).getKategoriaChoroby().getKategoriaChorobyName();
+        for (Choroba kategoriaChoroby : kategoriaChorobies) {
+            String nazwa = kategoriaChoroby.getKategoriaChoroby().getKategoriaChorobyName();
             if (kategorieIlosc.containsKey(nazwa)) {
                 Integer ilosc = kategorieIlosc.get(nazwa).intValue();
                 ilosc++;

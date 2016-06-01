@@ -1,4 +1,4 @@
-package skoczny.jedynak.poradnik.service;
+package skoczny.jedynak.poradnik.service.repository;
 
 public class PoradnikFarmaceutycznyDBInitializer {
 

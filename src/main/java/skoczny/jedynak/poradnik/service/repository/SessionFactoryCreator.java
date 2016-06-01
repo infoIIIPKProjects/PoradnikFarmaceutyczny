@@ -1,4 +1,4 @@
-package skoczny.jedynak.poradnik.service;
+package skoczny.jedynak.poradnik.service.repository;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

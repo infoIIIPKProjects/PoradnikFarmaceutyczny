@@ -17,8 +17,6 @@ public class Choroba {
     @JoinColumn(name = "kategoriaChoroby_id")
     private KategoriaChoroby kategoriaChoroby;
 
-    private float amount;
-
     @Column(columnDefinition="TEXT")
     private String description;
 
@@ -38,14 +36,6 @@ public class Choroba {
 
     public void setKategoriaChoroby(KategoriaChoroby kategoriaChoroby) {
         this.kategoriaChoroby = kategoriaChoroby;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
     }
 
     public String getDescription() {
@@ -85,7 +75,6 @@ public class Choroba {
         Choroba choroba = (Choroba) o;
 
         if (id != choroba.id) return false;
-        if (Float.compare(choroba.amount, amount) != 0) return false;
         if (lek != null ? !lek.equals(choroba.lek) : choroba.lek != null) return false;
         if (kategoriaChoroby != null ? !kategoriaChoroby.equals(choroba.kategoriaChoroby) : choroba.kategoriaChoroby != null)
             return false;
@@ -99,7 +88,6 @@ public class Choroba {
         int result = id;
         result = 31 * result + (lek != null ? lek.hashCode() : 0);
         result = 31 * result + (kategoriaChoroby != null ? kategoriaChoroby.hashCode() : 0);
-        result = 31 * result + (amount != +0.0f ? Float.floatToIntBits(amount) : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (nazwa != null ? nazwa.hashCode() : 0);
         return result;

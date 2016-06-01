@@ -100,7 +100,7 @@
         </c:if>
     </div>
     <div class="form-wrapper">
-        <form method="post" action="/user/aftereditingLek.html">
+        <form method="post" action="/user/afterEditingLek.html">
             <input type="hidden" name="lek_id" value="${lek_id}">
             <div class="item">
                 <div>Nazwa leku</div>

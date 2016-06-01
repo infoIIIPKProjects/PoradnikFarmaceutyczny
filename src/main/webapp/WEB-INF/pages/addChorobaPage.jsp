@@ -95,7 +95,7 @@
         </ul>
     </div>
     <div class="form-wrapper">
-        <form method="post" action="/user/afteraddingItem.html">
+        <form method="post" action="/user/afterAddingChoroba.html">
             <div class="item">
                 <div>Nazwa choroby</div>
                 <input type="text" value="${choroba.nazwa}" name="nazwa"/>

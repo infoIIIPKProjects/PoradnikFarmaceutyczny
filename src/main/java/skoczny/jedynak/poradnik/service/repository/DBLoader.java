@@ -1,8 +1,9 @@
-package skoczny.jedynak.poradnik.service;
+package skoczny.jedynak.poradnik.service.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import skoczny.jedynak.poradnik.model.*;
+import skoczny.jedynak.poradnik.util.ChorobyOpisy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,131 +33,76 @@ public class DBLoader {
 
         Role admin = addRoleToDB("admin");
 
-        Role user = addRoleToDB("user");
+        // Role user = addRoleToDB("user");
 //===============  USER -> defaultUser ==============================
-        //User defaultUser = addUserToDB("user", "password", "default.user@gmail.com", user);
+        User defaultUser = addUserToDB("admin", "Admin1", "default.user@gmail.com", admin);
 //===============  LEK ==============================
         Lek aerius = addLekToDB("Aerius", randomAvailability(), randomPrize());
-
         Lek acatarZatoki = addLekToDB("Acatar Zatoki", randomAvailability(), randomPrize());
-
         Lek acidolac = addLekToDB("Acidolac ", randomAvailability(), randomPrize());
-
         Lek albothyl = addLekToDB("Albothyl ", randomAvailability(), randomPrize());
-
         Lek anafranil = addLekToDB("Anafranil", randomAvailability(), randomPrize());
-
         Lek baikaderm = addLekToDB("Baikaderm ", randomAvailability(), randomPrize());
-
         Lek baraclude = addLekToDB("Baraclude", randomAvailability(), randomPrize());
-
         Lek bebilon = addLekToDB("Bebilon ", randomAvailability(), randomPrize());
-
         Lek betadrin = addLekToDB("Betadrin ", randomAvailability(), randomPrize());
-
         Lek biseptol = addLekToDB("Biseptol", randomAvailability(), randomPrize());
-
         Lek cepastil = addLekToDB("Cepastil ", randomAvailability(), randomPrize());
-
         Lek calcenato = addLekToDB("Calcenato", randomAvailability(), randomPrize());
-
         Lek dicloabak = addLekToDB("Dicloabak ", randomAvailability(), randomPrize());
-
         Lek daktarin = addLekToDB("Daktarin", randomAvailability(), randomPrize());
-
         Lek grypolek = addLekToDB("Grypolek ", randomAvailability(), randomPrize());
-
         Lek gaviscon = addLekToDB("Gaviscon ", randomAvailability(), randomPrize());
-
         Lek fludara = addLekToDB("Fludara", randomAvailability(), randomPrize());
-
         Lek fenistil = addLekToDB("Fenistil ", randomAvailability(), randomPrize());
-
         Lek eprex = addLekToDB("Eprex", randomAvailability(), randomPrize());
-
         Lek elobaza = addLekToDB("Elo-baza ", randomAvailability(), randomPrize());
-
         Lek hascoderm = addLekToDB("Hascoderm", randomAvailability(), randomPrize());
-
         Lek hydroskin = addLekToDB("Hydroskin", randomAvailability(), randomPrize());
-
         Lek ibuprom = addLekToDB("Ibuprom", randomAvailability(), randomPrize());
-
         Lek itragen = addLekToDB("Itragen ", randomAvailability(), randomPrize());
-
         Lek javlor = addLekToDB("Javlor ", randomAvailability(), randomPrize());
-
         Lek jovesto = addLekToDB("Jovesto", randomAvailability(), randomPrize());
-
         Lek kamiren = addLekToDB("Kamiren ", randomAvailability(), randomPrize());
-
         Lek klimicin = addLekToDB("Klimicin", randomAvailability(), randomPrize());
-
         Lek laremid = addLekToDB("Laremid", randomAvailability(), randomPrize());
-
         Lek logest = addLekToDB("Logest ", randomAvailability(), randomPrize());
-
         Lek marbodin = addLekToDB("Marbodin", randomAvailability(), randomPrize());
-
         Lek menopur = addLekToDB("Menopur ", randomAvailability(), randomPrize());
-
         Lek nakom = addLekToDB("Nakom", randomAvailability(), randomPrize());
-
         Lek nervosol = addLekToDB("Nervosol", randomAvailability(), randomPrize());
-
         Lek oeparol = addLekToDB("Oeparol", randomAvailability(), randomPrize());
-
         Lek optive = addLekToDB("Optive ", randomAvailability(), randomPrize());
-
         Lek pentaglobin = addLekToDB("Pentaglobin", randomAvailability(), randomPrize());
-
         Lek plavocorin = addLekToDB("Plavocorin", randomAvailability(), randomPrize());
-
         Lek quatrum = addLekToDB("Quatrum", randomAvailability(), randomPrize());
-
         Lek qumag = addLekToDB("Qumag", randomAvailability(), randomPrize());
-
         Lek ramistad = addLekToDB("Ramistad", randomAvailability(), randomPrize());
-
         Lek risperon = addLekToDB("Risperon", randomAvailability(), randomPrize());
-
         Lek sclefic = addLekToDB("Sclefic", randomAvailability(), randomPrize());
-
         Lek sulphera = addLekToDB("Sulphera", randomAvailability(), randomPrize());
-
         Lek tacefur = addLekToDB("Tacefur", randomAvailability(), randomPrize());
-
         Lek telmisartan = addLekToDB("Telmisartan", randomAvailability(), randomPrize());
-
         Lek ulgix = addLekToDB("Ulgix", randomAvailability(), randomPrize());
-
         Lek ursocam = addLekToDB("Ursocam", randomAvailability(), randomPrize());
-
         Lek valsacor = addLekToDB("Valsacor", randomAvailability(), randomPrize());
-
         Lek venomenhal = addLekToDB("Venomenhal", randomAvailability(), randomPrize());
-
         Lek wegiel = addLekToDB("Wegiel leczniczy", randomAvailability(), randomPrize());
-
         Lek wolarex = addLekToDB("Wolarex", randomAvailability(), randomPrize());
-
         Lek xaloptic = addLekToDB("Xaloptic Combi", randomAvailability(), randomPrize());
-
         Lek xylometazolin = addLekToDB("Xylometazolin", randomAvailability(), randomPrize());
-
         Lek zajavit = addLekToDB("Zajavit", randomAvailability(), randomPrize());
-
         Lek ziagen = addLekToDB("Ziagen", randomAvailability(), randomPrize());
 
 //===============  KATEGORIA CHOROBY ==============================
 
-       // KategoriaChoroby skory = addKategoriaChorobyToDB("Choroby skory?");
+        // KategoriaChoroby skory = addKategoriaChorobyToDB("Choroby skory?");
         //kategorie.add(skory);
         KategoriaChoroby rzadkie = addKategoriaChorobyToDB("Rzadkie choroby?");
         kategorie.add(rzadkie);
         KategoriaChoroby reumatyczne = addKategoriaChorobyToDB("Choroby reumatyczne?");
         kategorie.add(reumatyczne);
-       // KategoriaChoroby psychosomatyczne = addKategoriaChorobyToDB("Choroby psychosomatyczne?");
+        // KategoriaChoroby psychosomatyczne = addKategoriaChorobyToDB("Choroby psychosomatyczne?");
         //kategorie.add(psychosomatyczne);
         //KategoriaChoroby pokarmowe = addKategoriaChorobyToDB("Choroby ukladu pokarmowego?");
         //kategorie.add(pokarmowe);
@@ -176,7 +122,7 @@ public class DBLoader {
         kategorie.add(genetyczne);
         KategoriaChoroby cywilizacyjne = addKategoriaChorobyToDB("Choroby cywilizacyjne");
         kategorie.add(cywilizacyjne);
-       // KategoriaChoroby ruchu = addKategoriaChorobyToDB("Choroby ukladu ruchu");
+        // KategoriaChoroby ruchu = addKategoriaChorobyToDB("Choroby ukladu ruchu");
         //kategorie.add(ruchu);
         KategoriaChoroby moczowe = addKategoriaChorobyToDB("Choroby ukladu moczowo-plciowego");
         kategorie.add(moczowe);
@@ -200,7 +146,7 @@ public class DBLoader {
         kategorie.add(zapalenie);
         //KategoriaChoroby zawodowe = addKategoriaChorobyToDB("Choroby zawodowe");
         //kategorie.add(zawodowe);
-       // KategoriaChoroby zespolowe = addKategoriaChorobyToDB("Zespoly chorobowe?");
+        // KategoriaChoroby zespolowe = addKategoriaChorobyToDB("Zespoly chorobowe?");
         //kategorie.add(zespolowe);
         //KategoriaChoroby dekompresyjne = addKategoriaChorobyToDB("Choroba dekompresyjna");
         //kategorie.add(dekompresyjne);
@@ -284,7 +230,6 @@ public class DBLoader {
         Role role = new Role();
         role.setRoleName(roleName);
         session.save(role);
-
         return role;
     }
 
@@ -295,7 +240,6 @@ public class DBLoader {
         user.setEmail(email);
         user.setRole(role);
         session.save(user);
-
         return user;
     }
 
@@ -303,7 +247,6 @@ public class DBLoader {
         KategoriaChoroby kategoriaChoroby = new KategoriaChoroby();
         kategoriaChoroby.setKategoriaChorobyName(categoryName);
         session.save(kategoriaChoroby);
-
         return kategoriaChoroby;
     }
 
@@ -313,7 +256,6 @@ public class DBLoader {
         lek.setCena(cena);
         lek.setCzyDostepny(czyDostepny);
         session.save(lek);
-
         return lek;
     }
 
