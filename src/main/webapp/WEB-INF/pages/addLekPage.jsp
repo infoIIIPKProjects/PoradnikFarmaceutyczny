@@ -64,19 +64,19 @@
                 <c:when test="${user.role.roleName.equals(\"admin\")}">
                     <li class="item">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
 
                 <c:when test="${user.role.roleName.equals(\"kierownictwo\")}">
                     <li class="item">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="item disabled">
-                        <a><span>Pokaz wykresy</span> </a>
+                        <a><span>Pokaż wykresy</span> </a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -110,7 +110,7 @@
                 <input type="text" value="${lek.cena}" name="cena"/>
             </div>
             <div class="item">
-                <div>Dostepnosc</div>
+                <div>W magazynie?</div>
                 <select name="dostepnosc">
                     <option value="tak">tak</option>
                     <option value="nie">nie</option>

@@ -5,6 +5,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="/resources/static/css/top-menu.css">
+    <link rel="stylesheet" type="text/css" href="/resources/static/css/images.css">
 </head>
 <body>
 <div class="page-wrapper">
@@ -63,14 +64,14 @@
                 <c:when test="${user.role.roleName.equals(\"admin\")}">
                     <li class="item selected">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
 
                 <c:when test="${user.role.roleName.equals(\"kierownictwo\")}">
                     <li class="item selected">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
                 <c:otherwise>
@@ -96,7 +97,7 @@
     <div class="images-wrapper">
         <img src="${kategorieObraz}"/>
         <img src="${chorobyLekiObraz}"/>
-        <img src="${dostepnoscObraz}"/>
+        <div class="image"><img src="${dostepnoscObraz}"/></div>
         <img src="${cenyLekowObraz}"/>
     </div>
     <div id="greeting" class="greeting"></div>

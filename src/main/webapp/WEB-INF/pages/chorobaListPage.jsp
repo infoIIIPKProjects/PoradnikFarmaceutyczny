@@ -75,19 +75,19 @@
                 <c:when test="${user.role.roleName.equals(\"admin\")}">
                     <li class="item">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
 
                 <c:when test="${user.role.roleName.equals(\"kierownictwo\")}">
                     <li class="item">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="item disabled">
-                        <a><span>Pokaz wykresy</span> </a>
+                        <a><span>Pokaż wykresy</span> </a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -128,20 +128,20 @@
                     <c:choose>
                         <c:when test="${user.role.roleName.equals(\"admin\")}">
                             <td class="modify"><a
-                                    href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usun</a>
+                                    href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usuń</a>
                             </td>
                             <td class="modify"><a href="<c:url value="/user/editChorobaPage${choroba.id}"/>">edytuj</a>
                             </td>
                         </c:when>
                         <c:when test="${user.role.roleName.equals(\"lekarz\")}">
                             <td class="modify"><a
-                                    href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usun</a>
+                                    href="<c:url value="/user/delete-shopping-item${choroba.id}"/>">usuń</a>
                             </td>
                             <td class="modify"><a href="<c:url value="/user/editChorobaPage${choroba.id}"/>">edytuj</a>
                             </td>
                         </c:when>
                         <c:otherwise>
-                            <td class="modify disabled"><a>usun</a></td>
+                            <td class="modify disabled"><a>usuń</a></td>
                             <td class="modify disabled"><a>edytuj</a></td>
                         </c:otherwise>
                     </c:choose>

@@ -50,7 +50,7 @@ public class ChartDrawer {
             plot.setStartAngle(200);
             plot.setDirection(Rotation.CLOCKWISE);
             plot.setForegroundAlpha(0.5f);
-            plot.setNoDataMessage("No data to display");
+            plot.setNoDataMessage("Brak danych");
         } else {
             chart = ChartFactory.createPieChart(
                     tytul,
@@ -110,7 +110,7 @@ public class ChartDrawer {
                 = new StandardCategoryItemLabelGenerator("{1}",
                 NumberFormat.getInstance());
         renderer.setItemLabelGenerator(generator);
-        renderer.setItemLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+        renderer.setItemLabelFont(new Font("Arsenal", Font.PLAIN, 12));
         renderer.setItemLabelsVisible(true);
         renderer.setPositiveItemLabelPosition(new ItemLabelPosition(
                 ItemLabelAnchor.CENTER, TextAnchor.CENTER, TextAnchor.CENTER,

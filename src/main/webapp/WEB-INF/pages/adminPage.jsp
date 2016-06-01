@@ -63,19 +63,19 @@
                 <c:when test="${user.role.roleName.equals(\"admin\")}">
                     <li class="item">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
 
                 <c:when test="${user.role.roleName.equals(\"kierownictwo\")}">
                     <li class="item">
                         <a href='/user/viewReportPage${user.id}'>
-                            <span>Pokaz wykresy</span></a>
+                            <span>Pokaż wykresy</span></a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="item disabled">
-                        <a><span>Pokaz wykresy</span> </a>
+                        <a><span>Pokaż wykresy</span> </a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -96,12 +96,17 @@
     <div class="form-wrapper" >
         <form method="post" action="/user/afterAddUser.html">
             <div class="item">
-                <div>User</div>
+                <div>Nazwa Loginu</div>
                 <select name="user">
                     <c:forEach var="user" items="${users}">
                         <option value="${user.name}">${user.name}</option>
                     </c:forEach>
                 </select>
+            </div>
+            <div class="button admin">
+                <button name= "updateOrDelete"   value="Delete">Usuń użytkownika
+                    <input type="submit"  hidden/>
+                </button>
             </div>
             <div class="item">
                 <div>Rola</div>
@@ -111,12 +116,7 @@
                     </c:forEach>
                 </select>
             </div>
-            <div class="button">
-                <button name= "updateOrDelete"   value="Delete">Usuń użytkownika
-                    <input type="submit"  hidden/>
-                </button>
-            </div>
-            <div class="button" >
+            <div class="button admin" >
                 <button name = "updateOrDelete"  value="Update">Zmień role użytkownika
                     <input type="submit" hidden/>
                 </button>

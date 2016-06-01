@@ -275,24 +275,24 @@ public class PoradnikFarmaceutycznyController {
         User user = service.getUserByUserName(principal.getName());
         model.addAttribute("user", user);
 
-        List<Choroba> kategoriaChorobies = service.listChoroba();
-        Map<String, Double> kategorieIlosc = prepareDataForKategorieChorob(kategoriaChorobies);
-        String kategorieObraz = ChartDrawer.createPieChartImageURIFromData(kategorieIlosc, "Choroby wedlug kategorii", true, false);
+//        List<Choroba> kategoriaChorobies = service.listChoroba();
+//        Map<String, Double> kategorieIlosc = prepareDataForKategorieChorob(kategoriaChorobies);
+//        String kategorieObraz = ChartDrawer.createPieChartImageURIFromData(kategorieIlosc, "Choroby wedlug kategorii", true, false);
 
         List<Lek> leki = service.listLeki();
         Map<String, Double> dostepnoscLekow = prepareDataForDostepnoscLekow(leki);
-        String dostepnoscObraz = ChartDrawer.createPieChartImageURIFromData(dostepnoscLekow, "Dostepnosc lekow", true, true);
+        String dostepnoscObraz = ChartDrawer.createPieChartImageURIFromData(dostepnoscLekow, "Stan magazynu z lekami", true, true);
 
-        Map<Lek, List<Choroba>> listLekiZchorobami = service.listLekiZchorobami();
-        Map<String, Double> chorobyLeki = prepareDataForChorobyLeki(listLekiZchorobami);
-        String chorobyLekiObraz = ChartDrawer.createLineChartImageURIFromData(chorobyLeki, "Ilosc chorob na lek", "Leki", "Ilosc chorob");
+//        Map<Lek, List<Choroba>> listLekiZchorobami = service.listLekiZchorobami();
+//        Map<String, Double> chorobyLeki = prepareDataForChorobyLeki(listLekiZchorobami);
+//        String chorobyLekiObraz = ChartDrawer.createLineChartImageURIFromData(chorobyLeki, "Ilosc chorob na lek", "Leki", "Ilosc chorob");
 
         Map<String, Double> cenyLekow = prepareDataForCenyLekow(leki);
-        String cenyLekowObraz = ChartDrawer.createBarChartImageURIFromData(cenyLekow, "Ceny lekow", "Nazwa", "Cena");
+        String cenyLekowObraz = ChartDrawer.createBarChartImageURIFromData(cenyLekow, "Leki", "Nazwa", "Cena");
 
-        model.addAttribute("kategorieObraz", kategorieObraz);
+        //model.addAttribute("kategorieObraz", kategorieObraz);
         model.addAttribute("dostepnoscObraz", dostepnoscObraz);
-        model.addAttribute("chorobyLekiObraz", chorobyLekiObraz);
+        //model.addAttribute("chorobyLekiObraz", chorobyLekiObraz);
         model.addAttribute("cenyLekowObraz", cenyLekowObraz);
         return "viewReportPage";
     }
@@ -314,8 +314,8 @@ public class PoradnikFarmaceutycznyController {
                 counter++;
             }
         }
-        dostepnoscLekow.put("dostepne", (double) counter);
-        dostepnoscLekow.put("nie dostepne", (double) (iloscLekow - counter));
+        dostepnoscLekow.put("jest", (double) counter);
+        dostepnoscLekow.put("brak", (double) (iloscLekow - counter));
         return dostepnoscLekow;
     }
 
