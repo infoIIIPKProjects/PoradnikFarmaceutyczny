@@ -24,16 +24,19 @@
           destroy-method="close">
 
         <!--OPENSHIFT -->
-        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
-        <!--<property name="url" value="jdbc:mysql://#{systemEnvironment.OPENSHIFT_MYSQL_DB_HOST}:#{systemEnvironment.OPENSHIFT_MYSQL_DB_PORT}/poradnik?autoReconnect=true"/>-->
-        <!--<property name="username" value="adminu91tGXK" />-->
-        <!--<property name="password" value="NNl3g_rZVfd-" />-->
-
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url"
-                  value="jdbc:mysql://localhost:3306/poradnik"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>
+        <property name="url" value="jdbc:mysql://#{systemEnvironment.OPENSHIFT_MYSQL_DB_HOST}:#{systemEnvironment.OPENSHIFT_MYSQL_DB_PORT}/poradnik?autoReconnect=true"/>
+        <property name="username" value="adminu91tGXK" />
+        <property name="password" value="NNl3g_rZVfd-" />
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+        <property name="validationQuery" value="SELECT 1" />
+
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="url"-->
+                  <!--value="jdbc:mysql://localhost:3306/poradnik"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value=""/>-->
     </bean>
 
     <bean id="hibernate4AnnotatedSessionFactory"

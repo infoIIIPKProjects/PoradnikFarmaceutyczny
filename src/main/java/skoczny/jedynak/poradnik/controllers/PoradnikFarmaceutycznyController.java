@@ -261,7 +261,7 @@ public class PoradnikFarmaceutycznyController {
     }
 
     private void resolveNoDataChange(Choroba item, Lek lek) {
-        Set<String> names = new HashSet<>();
+        Set<String> names = new HashSet<String>();
         for (Choroba choroba : lek.getChorobas()) {
             names.add(choroba.getNazwa());
         }
@@ -298,7 +298,7 @@ public class PoradnikFarmaceutycznyController {
     }
 
     private Map<String, Double> prepareDataForChorobyLeki(Map<Lek, List<Choroba>> listLekiZchorobami) {
-        Map<String, Double> lekiChoroby = new HashMap<>();
+        Map<String, Double> lekiChoroby = new HashMap<String, Double>();
         for (Map.Entry<Lek, List<Choroba>> entry : listLekiZchorobami.entrySet()) {
             lekiChoroby.put(entry.getKey().getLekName(), Double.valueOf(entry.getValue().size()));
         }
@@ -306,7 +306,7 @@ public class PoradnikFarmaceutycznyController {
     }
 
     private Map<String, Double> prepareDataForDostepnoscLekow(List<Lek> leki) {
-        Map<String, Double> dostepnoscLekow = new HashMap<>();
+        Map<String, Double> dostepnoscLekow = new HashMap<String, Double>();
         int counter = 0;
         int iloscLekow = leki.size();
         for (Lek lek : leki) {
@@ -320,7 +320,7 @@ public class PoradnikFarmaceutycznyController {
     }
 
     private Map<String, Double> prepareDataForKategorieChorob(List<Choroba> kategoriaChorobies) {
-        Map<String, Double> kategorieIlosc = new HashMap<>();
+        Map<String, Double> kategorieIlosc = new HashMap<String, Double>();
         for (Choroba kategoriaChoroby : kategoriaChorobies) {
             String nazwa = kategoriaChoroby.getKategoriaChoroby().getKategoriaChorobyName();
             if (kategorieIlosc.containsKey(nazwa)) {
@@ -335,7 +335,7 @@ public class PoradnikFarmaceutycznyController {
     }
 
     private Map<String, Double> prepareDataForCenyLekow(List<Lek> leki) {
-        Map<String, Double> cenyLeki = new HashMap<>();
+        Map<String, Double> cenyLeki = new HashMap<String, Double>();
         for (Lek lek : leki) {
             cenyLeki.put(lek.getLekName(), lek.getCena());
         }

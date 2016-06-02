@@ -15,7 +15,7 @@ public class DBLoader {
     private SessionFactory sessionFactory = SessionFactoryCreator.getSessionFactory();
     private Session session;
 
-    private List<KategoriaChoroby> kategorie = new ArrayList<>();
+    private List<KategoriaChoroby> kategorie = new ArrayList<KategoriaChoroby>();
 
     public void initDB() {
         session = sessionFactory.openSession();
