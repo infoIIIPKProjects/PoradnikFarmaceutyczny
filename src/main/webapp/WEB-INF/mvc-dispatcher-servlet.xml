@@ -14,39 +14,66 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    <bean id="dataSourceMySQL" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
 
         <!--OPENSHIFT -->
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://#{systemEnvironment.OPENSHIFT_MYSQL_DB_HOST}:#{systemEnvironment.OPENSHIFT_MYSQL_DB_PORT}/poradnik?autoReconnect=true"/>
-        <property name="username" value="adminu91tGXK" />
-        <property name="password" value="NNl3g_rZVfd-" />
-        <property name="testWhileIdle" value="true" />
-        <property name="timeBetweenEvictionRunsMillis" value="3600000" />
-        <property name="validationQuery" value="SELECT 1" />
-
         <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
-        <!--<property name="url"-->
-                  <!--value="jdbc:mysql://localhost:3306/poradnik"/>-->
-        <!--<property name="username" value="root"/>-->
-        <!--<property name="password" value=""/>-->
+        <!--<property name="url" value="jdbc:mysql://#{systemEnvironment.OPENSHIFT_MYSQL_DB_HOST}:#{systemEnvironment.OPENSHIFT_MYSQL_DB_PORT}/poradnik?autoReconnect=true"/>-->
+        <!--<property name="username" value="adminu91tGXK" />-->
+        <!--<property name="password" value="NNl3g_rZVfd-" />-->
+        <!--<property name="testWhileIdle" value="true" />-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="3600000" />-->
+        <!--<property name="validationQuery" value="SELECT 1" />-->
+
+        <!-- MySQL-->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/poradnik"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
     </bean>
 
-    <bean id="hibernate4AnnotatedSessionFactory"
+    <bean id="dataSourceMSSQL" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <!-- MS SQL SERVER-->
+        <property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:jtds:sqlserver://localhost:1434/poradnik"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+
+    </bean>
+
+    <bean id="sessionFactoryMSSQL"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dataSourceMSSQL"/>
         <property name="annotatedClasses">
             <list>
                 <value>skoczny.jedynak.poradnik.model.Choroba</value>
                 <value>skoczny.jedynak.poradnik.model.Lek</value>
                 <value>skoczny.jedynak.poradnik.model.KategoriaChoroby</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect
+                </prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="sessionFactoryMySQL"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceMySQL"/>
+        <property name="annotatedClasses">
+            <list>
                 <value>skoczny.jedynak.poradnik.model.User</value>
                 <value>skoczny.jedynak.poradnik.model.Role</value>
             </list>
@@ -60,26 +87,42 @@
         </property>
     </bean>
 
-    <bean id="poradnikFarmaceutycznyDAO" class="skoczny.jedynak.poradnik.dao.PoradnikFarmaceutycznyDAOImpl">
-        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    <bean id="poradnikFarmaceutycznyDAOMySQL" class="skoczny.jedynak.poradnik.dao.PoradnikFarmaceutycznyDAOImpl">
+        <property name="mySQLSessionFactory" ref="sessionFactoryMySQL"/>
     </bean>
 
-    <bean id="poradnikFarmaceutycznyService" class="skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyServiceImpl">
-        <property name="poradnikFarmaceutycznyDAO" ref="poradnikFarmaceutycznyDAO"></property>
+    <bean id="poradnikFarmaceutycznyDAOMSSQL" class="skoczny.jedynak.poradnik.dao.PoradnikFarmaceutycznyDAOImpl">
+        <property name="MSSQLSessionFactory" ref="sessionFactoryMSSQL"/>
+    </bean>
+
+    <bean id="poradnikFarmaceutycznyServiceMySQL"
+          class="skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyServiceImpl">
+        <property name="poradnikFarmaceutycznyDAOMySQL" ref="poradnikFarmaceutycznyDAOMySQL"/>
+    </bean>
+
+    <bean id="poradnikFarmaceutycznyServiceMSSQL"
+          class="skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyServiceImpl">
+        <property name="poradnikFarmaceutycznyDAOMSSQL" ref="poradnikFarmaceutycznyDAOMSSQL"/>
     </bean>
 
     <bean id="userDetailsService" class="skoczny.jedynak.poradnik.service.UserDetailService">
-        <property name="service" ref="poradnikFarmaceutycznyService" />
+        <property name="service" ref="poradnikFarmaceutycznyServiceMySQL"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManagerMSSQL"/>
+
+    <bean id="transactionManagerMSSQL" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactoryMSSQL"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManagerMySQL"/>
+
+    <bean id="transactionManagerMySQL" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactoryMySQL"/>
     </bean>
 
     <context:component-scan base-package="skoczny.jedynak.poradnik.controllers"/>
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </bean>
-
-    <security:global-method-security secured-annotations="enabled" />
+    <security:global-method-security secured-annotations="enabled"/>
 
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
@@ -90,25 +133,25 @@
                 authentication-failure-url="/loginPage"
                 username-parameter="name"
                 password-parameter="password"
-                />
-        <security:logout logout-success-url="/" />
+        />
+        <security:logout logout-success-url="/"/>
     </security:http>
 
 
-    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-    <bean id="assembler" class="skoczny.jedynak.poradnik.service.Assembler" />
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <bean id="assembler" class="skoczny.jedynak.poradnik.service.Assembler"/>
 
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider user-service-ref="userDetailsService"/>
         <!--<security:authentication-provider>-->
-            <!--<security:user-service>-->
-            <!--<security:user authorities="ROLE_ADMIN" password="password" name="defaultUser"/>-->
-            <!--<security:user authorities="ROLE_USER" password="pass" name="user"/>-->
+        <!--<security:user-service>-->
+        <!--<security:user authorities="ROLE_ADMIN" password="password" name="defaultUser"/>-->
+        <!--<security:user authorities="ROLE_USER" password="pass" name="user"/>-->
         <!--</security:user-service>-->
     </security:authentication-manager>
 
-    <context:component-scan base-package="skoczny.jedynak.poradnik" />
+    <context:component-scan base-package="skoczny.jedynak.poradnik"/>
 
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">

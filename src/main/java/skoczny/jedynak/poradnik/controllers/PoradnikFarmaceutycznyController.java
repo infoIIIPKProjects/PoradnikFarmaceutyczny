@@ -21,45 +21,53 @@ import java.util.*;
 public class PoradnikFarmaceutycznyController {
 
     @Autowired(required = true)
-    @Qualifier(value = "poradnikFarmaceutycznyService")
-    private PoradnikFarmaceutycznyService service;
+    @Qualifier(value = "poradnikFarmaceutycznyServiceMySQL")
+    private PoradnikFarmaceutycznyService serviceMSSQL;
 
-    public void setService(PoradnikFarmaceutycznyService service) {
-        this.service = service;
+    @Autowired(required = true)
+    @Qualifier(value = "poradnikFarmaceutycznyServiceMSSQL")
+    private PoradnikFarmaceutycznyService serviceMySQL;
+
+    public void setServiceMSSQL(PoradnikFarmaceutycznyService serviceMSSQL) {
+        this.serviceMSSQL = serviceMSSQL;
+    }
+
+    public void setServiceMySQL(PoradnikFarmaceutycznyService serviceMySQL) {
+        this.serviceMySQL = serviceMySQL;
     }
 
     @RequestMapping(value = {"/user/delete-shopping-item{id}"}, method = RequestMethod.GET)
     public String deleteChoroba(@PathVariable String id) {
-        service.removeChorobaByID(Integer.parseInt(id));
+        serviceMSSQL.removeChorobaByID(Integer.parseInt(id));
         return "redirect:/user/chorobaListPage.html";
     }
 
     @RequestMapping(value = {"/user/delete-lek{id}"}, method = RequestMethod.GET)
     public String deleteLek(@PathVariable String id) {
-        service.removeLek(Integer.parseInt(id));
+        serviceMSSQL.removeLek(Integer.parseInt(id));
         return "redirect:/user/lekListPage.html";
     }
 
     @RequestMapping(value = "/user/lekListPage.html", method = RequestMethod.GET)
     public String getUserWelcomePage2(Model model, Principal principal) {
         String userName = principal.getName();
-        User user = service.getUserByUserName(userName);
+        User user = serviceMySQL.getUserByUserName(userName);
         model.addAttribute("user", user);
-        model.addAttribute("leki", service.listLeki());
+        model.addAttribute("leki", serviceMSSQL.listLeki());
         return "lekListPage";
     }
 
     @RequestMapping(value = {"/user/edit-lek{id}"}, method = RequestMethod.GET)
     public String updateLek(@PathVariable String id, Model model, Principal principal) {
-        Lek lek = service.getLekById(Integer.parseInt(id));
+        Lek lek = serviceMSSQL.getLekById(Integer.parseInt(id));
 
-        User user = service.getUserByUserName(principal.getName());
+        User user = serviceMySQL.getUserByUserName(principal.getName());
         model.addAttribute("lek", lek);
         model.addAttribute("lek_id", id);
         model.addAttribute("nazwa", lek.getLekName());
         model.addAttribute("cena", lek.getCena());
         model.addAttribute("dostepnosc", lek.isCzyDostepny());
-        model.addAttribute("choroby", service.listLekiZchorobami().get(lek));
+        model.addAttribute("choroby", serviceMSSQL.listLekiZchorobami().get(lek));
         model.addAttribute("user", user);
 
         return "editLekPage";
@@ -68,15 +76,15 @@ public class PoradnikFarmaceutycznyController {
 
     @RequestMapping(value = {"/user/editChorobaPage{id}"}, method = RequestMethod.GET)
     public String updateChoroba(@PathVariable String id, Model model, Principal principal) {
-        Choroba choroba = service.getChorobaID(Integer.parseInt(id));
+        Choroba choroba = serviceMSSQL.getChorobaID(Integer.parseInt(id));
 
-        User user = service.getUserByUserName(principal.getName());
+        User user = serviceMySQL.getUserByUserName(principal.getName());
         model.addAttribute("choroba", choroba);
         model.addAttribute("choroba_id", id);
         model.addAttribute("nazwa", choroba.getNazwa());
         model.addAttribute("user", user);
-        model.addAttribute("lek", service.listLeki());
-        model.addAttribute("kategoriaChoroby", service.listCategories());
+        model.addAttribute("lek", serviceMSSQL.listLeki());
+        model.addAttribute("kategoriaChoroby", serviceMSSQL.listCategories());
         model.addAttribute("opis", choroba.getDescription());
 
         return "editChorobaPage";
@@ -84,8 +92,8 @@ public class PoradnikFarmaceutycznyController {
 
     @RequestMapping(value = {"/admin/adminPage.html"}, method = RequestMethod.GET)
     public String updateUser(Model model, Principal principal) {
-        User user = service.getUserByUserName(principal.getName());
-        List<User> users = service.listUsers();
+        User user = serviceMySQL.getUserByUserName(principal.getName());
+        List<User> users = serviceMySQL.listUsers();
         List<String> roles = new ArrayList<String>();
         roles.addAll(LoginResultController.idRoles.keySet());
         model.addAttribute("users", users);
@@ -99,15 +107,15 @@ public class PoradnikFarmaceutycznyController {
                                         @RequestParam("role") String roleName,
                                         @RequestParam("user") String userName,
                                         @RequestParam(value = "updateOrDelete") String updateOrDelete) {
-        User user = service.getUserByUserName(userName);
+        User user = serviceMySQL.getUserByUserName(userName);
         if (updateOrDelete.equals("Update")) {
             Role role = user.getRole();
             role.setRoleName(roleName);
             role.setId(LoginResultController.idRoles.get(roleName));
             user.setRole(role);
-            service.updateUserToDB(user);
+            serviceMySQL.updateUserToDB(user);
         } else if (updateOrDelete.equals("Delete")) {
-            service.removeUser(user);
+            serviceMySQL.removeUser(user);
         }
         return new ModelAndView("redirect:chorobaListPage.html");
     }
@@ -119,7 +127,7 @@ public class PoradnikFarmaceutycznyController {
                                         @RequestParam("cena") String cena,
                                         @RequestParam("dostepnosc") String dostepnosc
     ) {
-        Lek item = service.getLekById(Integer.parseInt(lekId));
+        Lek item = serviceMSSQL.getLekById(Integer.parseInt(lekId));
         ModelAndView model;
         if (nazwa.isEmpty()) {
             model = new ModelAndView("editLekPage");
@@ -139,10 +147,10 @@ public class PoradnikFarmaceutycznyController {
             } else {
                 item.setCzyDostepny(false);
             }
-            service.updateLek(item);
+            serviceMSSQL.updateLek(item);
             model = new ModelAndView("redirect:/user/lekListPage.html");
         }
-        User user = service.getUserByUserName(principal.getName());
+        User user = serviceMySQL.getUserByUserName(principal.getName());
         model.addObject("user", user);
         model.addObject("lek", item);
 
@@ -160,11 +168,11 @@ public class PoradnikFarmaceutycznyController {
         if (nazwa.isEmpty()) {
             model = new ModelAndView("addLekPage");
             model.addObject("error", "Nazwa leku jest pusta");
-            model.addObject("choroba", service.listChoroba());
+            model.addObject("choroba", serviceMSSQL.listChoroba());
         } else if ((!NumberUtils.isNumber(cena))) {
             model = new ModelAndView("addLekPage");
             model.addObject("error", "Cena nie jest liczbą");
-            model.addObject("choroba", service.listChoroba());
+            model.addObject("choroba", serviceMSSQL.listChoroba());
         } else {
             Lek item = new Lek();
             item.setLekName(nazwa);
@@ -176,24 +184,24 @@ public class PoradnikFarmaceutycznyController {
                 item.setCzyDostepny(false);
             }
 
-            Choroba choroba = service.getChorobaID(Integer.parseInt(chorobas_id));
+            Choroba choroba = serviceMSSQL.getChorobaID(Integer.parseInt(chorobas_id));
             item.getChorobas().add(choroba);
             choroba.setLek(item);
-            service.updateChorobaToDB(choroba);
+            serviceMSSQL.updateChorobaToDB(choroba);
             model = new ModelAndView("redirect:/user/lekListPage.html");
         }
-        User user = service.getUserByUserName(principal.getName());
+        User user = serviceMySQL.getUserByUserName(principal.getName());
         model.addObject("user", user);
         return model;
     }
 
     @RequestMapping(value = "/user/addChorobaPage.html", method = RequestMethod.GET)
     public String addChoroba(Model model, Principal principal) {
-        User user = service.getUserByUserName(principal.getName());
+        User user = serviceMySQL.getUserByUserName(principal.getName());
         model.addAttribute("nazwa", "");
         model.addAttribute("user", user);
-        model.addAttribute("lek", service.listLeki());
-        model.addAttribute("kategoriaChoroby", service.listCategories());
+        model.addAttribute("lek", serviceMSSQL.listLeki());
+        model.addAttribute("kategoriaChoroby", serviceMSSQL.listCategories());
         model.addAttribute("opis", "");
         return "addChorobaPage";
     }
@@ -201,12 +209,12 @@ public class PoradnikFarmaceutycznyController {
 
     @RequestMapping(value = "/user/addLekPage.html", method = RequestMethod.GET)
     public String addLek(Model model, Principal principal) {
-        User user = service.getUserByUserName(principal.getName());
+        User user = serviceMySQL.getUserByUserName(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("nazwa", "");
         model.addAttribute("cena", "");
         model.addAttribute("dostepnosc", "");
-        model.addAttribute("choroba", service.listChoroba());
+        model.addAttribute("choroba", serviceMSSQL.listChoroba());
         return "addLekPage";
     }
 
@@ -221,14 +229,14 @@ public class PoradnikFarmaceutycznyController {
         Choroba item = new Choroba();
         item.setNazwa(nazwa);
 
-        KategoriaChoroby kategoriaChoroby = service.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
+        KategoriaChoroby kategoriaChoroby = serviceMSSQL.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
         item.setKategoriaChoroby(kategoriaChoroby);
 
-        Lek shop = service.getLekById(Integer.parseInt(lekId));
+        Lek shop = serviceMSSQL.getLekById(Integer.parseInt(lekId));
         item.setLek(shop);
         item.setDescription(description);
 
-        service.addChorobaToDB(item);
+        serviceMSSQL.addChorobaToDB(item);
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
         return model;
     }
@@ -242,19 +250,19 @@ public class PoradnikFarmaceutycznyController {
                                             @RequestParam("nazwa") String nazwa
     ) {
 
-        Choroba item = service.getChorobaID(Integer.parseInt(chorobaId));
+        Choroba item = serviceMSSQL.getChorobaID(Integer.parseInt(chorobaId));
         item.setNazwa(nazwa);
 
-        KategoriaChoroby kategoriaChoroby = service.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
+        KategoriaChoroby kategoriaChoroby = serviceMSSQL.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
         item.setKategoriaChoroby(kategoriaChoroby);
 
-        Lek lek = service.getLekById(Integer.parseInt(lekId));
+        Lek lek = serviceMSSQL.getLekById(Integer.parseInt(lekId));
 
         resolveNoDataChange(item, lek);
 
         item.setDescription(description);
 
-        service.updateChorobaToDB(item);
+        serviceMSSQL.updateChorobaToDB(item);
 
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
         return model;
@@ -272,14 +280,14 @@ public class PoradnikFarmaceutycznyController {
 
     @RequestMapping(value = "/user/viewReportPage{id}", method = RequestMethod.GET)
     public String viewUserReport(Model model, Principal principal) {
-        User user = service.getUserByUserName(principal.getName());
+        User user = serviceMySQL.getUserByUserName(principal.getName());
         model.addAttribute("user", user);
 
 //        List<Choroba> kategoriaChorobies = service.listChoroba();
 //        Map<String, Double> kategorieIlosc = prepareDataForKategorieChorob(kategoriaChorobies);
 //        String kategorieObraz = ChartDrawer.createPieChartImageURIFromData(kategorieIlosc, "Choroby wedlug kategorii", true, false);
 
-        List<Lek> leki = service.listLeki();
+        List<Lek> leki = serviceMSSQL.listLeki();
         Map<String, Double> dostepnoscLekow = prepareDataForDostepnoscLekow(leki);
         String dostepnoscObraz = ChartDrawer.createPieChartImageURIFromData(dostepnoscLekow, "Stan magazynu z lekami", true, true);
 

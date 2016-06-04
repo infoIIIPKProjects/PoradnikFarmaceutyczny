@@ -2,6 +2,8 @@ package skoczny.jedynak.poradnik.service.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.internal.SessionFactoryServiceRegistryImpl;
 import skoczny.jedynak.poradnik.model.*;
 import skoczny.jedynak.poradnik.util.ChorobyOpisy;
 
@@ -12,15 +14,22 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DBLoader {
-    private SessionFactory sessionFactory = SessionFactoryCreator.getSessionFactory();
-    private Session session;
+    private SessionFactory sessionFactoryMSServer = new Configuration()
+            .configure("msSql-config.xml")
+            .buildSessionFactory();
+
+    private SessionFactory sessionFactoryMySQL = new Configuration()
+            .configure("mySql.cfg.xml")
+            .buildSessionFactory();
+
+    private Session sessionMSServer;
+    private Session sessionMySQL;
 
     private List<KategoriaChoroby> kategorie = new ArrayList<KategoriaChoroby>();
 
-    public void initDB() {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-
+    public void initMySQLDB() {
+        sessionMySQL = sessionFactoryMySQL.openSession();
+        sessionMySQL.beginTransaction();
 
 //===============  ROLE  ==============================
         Role lekarz = addRoleToDB("lekarz");
@@ -36,6 +45,15 @@ public class DBLoader {
         // Role user = addRoleToDB("user");
 //===============  USER -> defaultUser ==============================
         User defaultUser = addUserToDB("admin", "Admin1", "default.user@gmail.com", admin);
+
+        sessionMySQL.getTransaction().commit();
+        sessionMySQL.close();
+    }
+
+    public void initMSSQLDB() {
+        sessionMSServer = sessionFactoryMSServer.openSession();
+        sessionMSServer.beginTransaction();
+
 //===============  LEK ==============================
         Lek aerius = addLekToDB("Aerius", randomAvailability(), randomPrize());
         Lek acatarZatoki = addLekToDB("Acatar Zatoki", randomAvailability(), randomPrize());
@@ -213,8 +231,8 @@ public class DBLoader {
         addChorobaToDB("Niezyt nosa", betadrin, randomCategory(), ChorobyOpisy.katar);
         addChorobaToDB("Zakazenie drog oddechowych", biseptol, randomCategory(), ChorobyOpisy.zakazenie);
 
-        session.getTransaction().commit();
-        session.close();
+        sessionMSServer.getTransaction().commit();
+        sessionMSServer.close();
     }
 
     private void addChorobaToDB(String nazwa, Lek lek, KategoriaChoroby kategoriaChoroby, String description) {
@@ -223,13 +241,13 @@ public class DBLoader {
         choroba.setLek(lek);
         choroba.setDescription(description);
         choroba.setKategoriaChoroby(kategoriaChoroby);
-        session.save(choroba);
+        sessionMSServer.save(choroba);
     }
 
     private Role addRoleToDB(String roleName) {
         Role role = new Role();
         role.setRoleName(roleName);
-        session.save(role);
+        sessionMySQL.save(role);
         return role;
     }
 
@@ -239,14 +257,14 @@ public class DBLoader {
         user.setPassword(password);
         user.setEmail(email);
         user.setRole(role);
-        session.save(user);
+        sessionMySQL.save(user);
         return user;
     }
 
     private KategoriaChoroby addKategoriaChorobyToDB(String categoryName) {
         KategoriaChoroby kategoriaChoroby = new KategoriaChoroby();
         kategoriaChoroby.setKategoriaChorobyName(categoryName);
-        session.save(kategoriaChoroby);
+        sessionMSServer.save(kategoriaChoroby);
         return kategoriaChoroby;
     }
 
@@ -255,7 +273,7 @@ public class DBLoader {
         lek.setLekName(lekName);
         lek.setCena(cena);
         lek.setCzyDostepny(czyDostepny);
-        session.save(lek);
+        sessionMSServer.save(lek);
         return lek;
     }
 

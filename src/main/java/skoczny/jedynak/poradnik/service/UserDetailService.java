@@ -15,7 +15,7 @@ import skoczny.jedynak.poradnik.model.User;
 public class UserDetailService implements UserDetailsService {
 
     @Autowired
-    @Qualifier(value = "poradnikFarmaceutycznyService")
+    @Qualifier(value = "poradnikFarmaceutycznyServiceMySQL")
     private PoradnikFarmaceutycznyService service;
 
     @Autowired
@@ -23,7 +23,6 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username);
         User user = service.getUserByUserName(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found");

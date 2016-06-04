@@ -4,6 +4,7 @@ public class PoradnikFarmaceutycznyDBInitializer {
 
     public static void main(String[] args) {
         DBLoader loader = new DBLoader();
-        loader.initDB();
+        loader.initMySQLDB();
+        loader.initMSSQLDB();
     }
 }

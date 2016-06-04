@@ -29,17 +29,25 @@ public class LoginResultController {
             .put("admin", 5).build();
 
     @Autowired(required = true)
-    @Qualifier(value = "poradnikFarmaceutycznyService")
-    private PoradnikFarmaceutycznyService service;
+    @Qualifier(value = "poradnikFarmaceutycznyServiceMySQL")
+    private PoradnikFarmaceutycznyService serviceMSSQL;
 
-    public void setService(PoradnikFarmaceutycznyService service) {
-        this.service = service;
+    @Autowired(required = true)
+    @Qualifier(value = "poradnikFarmaceutycznyServiceMSSQL")
+    private PoradnikFarmaceutycznyService serviceMySQL;
+
+    public void setServiceMSSQL(PoradnikFarmaceutycznyService serviceMSSQL) {
+        this.serviceMSSQL = serviceMSSQL;
+    }
+
+    public void setServiceMySQL(PoradnikFarmaceutycznyService serviceMySQL) {
+        this.serviceMySQL = serviceMySQL;
     }
 
     @RequestMapping(value = "/admin/chorobaListPage.html", method = RequestMethod.GET)
     public ModelAndView getAdminWelcomePage(Principal principal) {
         String userName = principal.getName();
-        User user = service.getUserByUserName(userName);
+        User user = serviceMySQL.getUserByUserName(userName);
         ModelAndView model = new ModelAndView("adminWelcomePage");
         model.addObject("user", user);
         return model;
@@ -48,8 +56,8 @@ public class LoginResultController {
     @RequestMapping(value = "/user/chorobaListPage.html", method = RequestMethod.GET)
     public ModelAndView getUserWelcomePage(Principal principal) {
         String userName = principal.getName();
-        User user = service.getUserByUserName(userName);
-        List<Choroba> chorobaList = service.listChoroba();
+        User user = serviceMySQL.getUserByUserName(userName);
+        List<Choroba> chorobaList = serviceMSSQL.listChoroba();
         ModelAndView model = new ModelAndView("chorobaListPage");
         model.addObject("chorobaList", chorobaList);
         model.addObject("user", user);
@@ -67,7 +75,7 @@ public class LoginResultController {
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public ModelAndView processRegistration(@ModelAttribute("userForm") User user, String errorValue) {
         ModelAndView model;
-        boolean exists = service.isInSession(user.getName());
+        boolean exists = serviceMySQL.isInSession(user.getName());
         if (!exists) {
             if (!user.getPassword().matches(PASSWORD_PATTERN)) {
                 errorValue = "Hasło musi mieć co najmniej 6 znaków, 1 wielką litere, 1 małą literę i 1 cyfrę.";
@@ -77,7 +85,7 @@ public class LoginResultController {
                 Role role = new Role();
                 role.setId(idRoles.get("aptekarz"));
                 user.setRole(role);
-                service.addUserToDB(user);
+                serviceMySQL.addUserToDB(user);
                 model = new ModelAndView("redirect:/");
             }
         } else {

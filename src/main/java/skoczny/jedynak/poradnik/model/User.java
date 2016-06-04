@@ -1,7 +1,6 @@
 package skoczny.jedynak.poradnik.model;
 
 import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @Table(name = "user")
