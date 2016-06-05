@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import skoczny.jedynak.poradnik.controllers.audit.Audit;
 import skoczny.jedynak.poradnik.dataview.ChartDrawer;
 import skoczny.jedynak.poradnik.model.*;
 import skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyService;
@@ -36,18 +37,19 @@ public class PoradnikFarmaceutycznyController {
         this.serviceMySQL = serviceMySQL;
     }
 
+    @Audit(message = "/user/delete-shopping-item{id}")
     @RequestMapping(value = {"/user/delete-shopping-item{id}"}, method = RequestMethod.GET)
     public String deleteChoroba(@PathVariable String id) {
         serviceMSSQL.removeChorobaByID(Integer.parseInt(id));
         return "redirect:/user/chorobaListPage.html";
     }
-
+    @Audit(message = "/user/delete-lek{id}")
     @RequestMapping(value = {"/user/delete-lek{id}"}, method = RequestMethod.GET)
     public String deleteLek(@PathVariable String id) {
         serviceMSSQL.removeLek(Integer.parseInt(id));
         return "redirect:/user/lekListPage.html";
     }
-
+    @Audit(message = "/user/lekListPage.html")
     @RequestMapping(value = "/user/lekListPage.html", method = RequestMethod.GET)
     public String getUserWelcomePage2(Model model, Principal principal) {
         String userName = principal.getName();
@@ -56,7 +58,7 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("leki", serviceMSSQL.listLeki());
         return "lekListPage";
     }
-
+    @Audit(message = "/user/edit-lek{id}")
     @RequestMapping(value = {"/user/edit-lek{id}"}, method = RequestMethod.GET)
     public String updateLek(@PathVariable String id, Model model, Principal principal) {
         Lek lek = serviceMSSQL.getLekById(Integer.parseInt(id));
@@ -73,7 +75,7 @@ public class PoradnikFarmaceutycznyController {
         return "editLekPage";
     }
 
-
+    @Audit(message = "/user/editChorobaPage{id}")
     @RequestMapping(value = {"/user/editChorobaPage{id}"}, method = RequestMethod.GET)
     public String updateChoroba(@PathVariable String id, Model model, Principal principal) {
         Choroba choroba = serviceMSSQL.getChorobaID(Integer.parseInt(id));
@@ -89,7 +91,7 @@ public class PoradnikFarmaceutycznyController {
 
         return "editChorobaPage";
     }
-
+    @Audit(message = "/admin/adminPage.html")
     @RequestMapping(value = {"/admin/adminPage.html"}, method = RequestMethod.GET)
     public String updateUser(Model model, Principal principal) {
         User user = serviceMySQL.getUserByUserName(principal.getName());
@@ -101,7 +103,7 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("user", user);
         return "adminPage";
     }
-
+    @Audit(message = "/user/afterAddUser.html")
     @RequestMapping(value = "/user/afterAddUser.html", method = RequestMethod.POST)
     public ModelAndView afterAddingUser(Principal principal,
                                         @RequestParam("role") String roleName,
@@ -119,7 +121,7 @@ public class PoradnikFarmaceutycznyController {
         }
         return new ModelAndView("redirect:chorobaListPage.html");
     }
-
+    @Audit(message = "/user/afterEditingLek")
     @RequestMapping(value = "/user/afterEditingLek", method = RequestMethod.POST)
     public ModelAndView afterEditingLek(Principal principal,
                                         @RequestParam("nazwa") String nazwa,
@@ -156,7 +158,7 @@ public class PoradnikFarmaceutycznyController {
 
         return model;
     }
-
+    @Audit(message = "/user/afterAddingLek")
     @RequestMapping(value = "/user/afterAddingLek", method = RequestMethod.POST)
     public ModelAndView afterAddingLek(Principal principal,
                                        @RequestParam("nazwa") String nazwa,
@@ -194,7 +196,7 @@ public class PoradnikFarmaceutycznyController {
         model.addObject("user", user);
         return model;
     }
-
+    @Audit(message = "/user/addChorobaPage.html")
     @RequestMapping(value = "/user/addChorobaPage.html", method = RequestMethod.GET)
     public String addChoroba(Model model, Principal principal) {
         User user = serviceMySQL.getUserByUserName(principal.getName());
@@ -206,7 +208,7 @@ public class PoradnikFarmaceutycznyController {
         return "addChorobaPage";
     }
 
-
+    @Audit(message = "/user/addLekPage.html")
     @RequestMapping(value = "/user/addLekPage.html", method = RequestMethod.GET)
     public String addLek(Model model, Principal principal) {
         User user = serviceMySQL.getUserByUserName(principal.getName());
@@ -217,7 +219,7 @@ public class PoradnikFarmaceutycznyController {
         model.addAttribute("choroba", serviceMSSQL.listChoroba());
         return "addLekPage";
     }
-
+    @Audit(message = "/user/afterAddingChoroba.html")
     @RequestMapping(value = "/user/afterAddingChoroba.html", method = RequestMethod.POST)
     public ModelAndView afterAddingChoroba(Principal principal,
                                            @RequestParam("kategoriaChoroby") String kategoriaChorobyId,
@@ -240,7 +242,7 @@ public class PoradnikFarmaceutycznyController {
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
         return model;
     }
-
+    @Audit(message = "/user/afterEditingChoroba")
     @RequestMapping(value = "/user/afterEditingChoroba", method = RequestMethod.POST)
     public ModelAndView afterEditingChoroba(Principal principal,
                                             @RequestParam("kategoriaChoroby") String kategoriaChorobyId,
@@ -277,7 +279,7 @@ public class PoradnikFarmaceutycznyController {
             item.setLek(lek);
         }
     }
-
+    @Audit(message = "/user/viewReportPage{id}")
     @RequestMapping(value = "/user/viewReportPage{id}", method = RequestMethod.GET)
     public String viewUserReport(Model model, Principal principal) {
         User user = serviceMySQL.getUserByUserName(principal.getName());

@@ -2,11 +2,17 @@ package skoczny.jedynak.poradnik.service.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.internal.SessionFactoryServiceRegistryImpl;
+import org.hibernate.service.ServiceRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import skoczny.jedynak.poradnik.model.*;
 import skoczny.jedynak.poradnik.util.ChorobyOpisy;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -14,20 +20,35 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DBLoader {
-    private SessionFactory sessionFactoryMSServer = new Configuration()
-            .configure("msSql-config.xml")
-            .buildSessionFactory();
-
-    private SessionFactory sessionFactoryMySQL = new Configuration()
-            .configure("mySql.cfg.xml")
-            .buildSessionFactory();
+    private final static Logger logger = LoggerFactory.getLogger(DBLoader.class);
+    private SessionFactory sessionFactoryMSServer;
+    private SessionFactory sessionFactoryMySQL;
 
     private Session sessionMSServer;
     private Session sessionMySQL;
 
     private List<KategoriaChoroby> kategorie = new ArrayList<KategoriaChoroby>();
 
+    public void initMongoDB() {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pageActivity");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        PageActivity pageActivity = new PageActivity();
+        pageActivity.setPageName("test activity ");
+        entityManager.persist(pageActivity);
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManagerFactory.close();
+    }
+
     public void initMySQLDB() {
+        Configuration configuration = new Configuration();
+        configuration.configure("mySql.cfg.xml");
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                configuration.getProperties()).build();
+        sessionFactoryMySQL = configuration.buildSessionFactory(serviceRegistry);
         sessionMySQL = sessionFactoryMySQL.openSession();
         sessionMySQL.beginTransaction();
 
@@ -51,6 +72,11 @@ public class DBLoader {
     }
 
     public void initMSSQLDB() {
+        Configuration configuration = new Configuration();
+        configuration.configure("msSql-config.xml");
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                configuration.getProperties()).build();
+        sessionFactoryMSServer = configuration.buildSessionFactory(serviceRegistry);
         sessionMSServer = sessionFactoryMSServer.openSession();
         sessionMSServer.beginTransaction();
 

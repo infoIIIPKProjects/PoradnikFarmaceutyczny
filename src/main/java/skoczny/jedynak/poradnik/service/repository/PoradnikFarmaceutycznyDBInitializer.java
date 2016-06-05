@@ -6,5 +6,6 @@ public class PoradnikFarmaceutycznyDBInitializer {
         DBLoader loader = new DBLoader();
         loader.initMySQLDB();
         loader.initMSSQLDB();
+        loader.initMongoDB();
     }
 }

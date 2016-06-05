@@ -1,6 +1,7 @@
 package skoczny.jedynak.poradnik.controllers;
 
 import com.google.common.collect.ImmutableMap;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,16 +9,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import skoczny.jedynak.poradnik.controllers.audit.Audit;
 import skoczny.jedynak.poradnik.model.Choroba;
 import skoczny.jedynak.poradnik.model.Role;
 import skoczny.jedynak.poradnik.model.User;
 import skoczny.jedynak.poradnik.service.PoradnikFarmaceutycznyService;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class LoginResultController {
+    private final static Logger logger = Logger.getLogger(LoginResultController.class);
     private static final String PASSWORD_PATTERN =
             "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})";
 
@@ -44,15 +48,20 @@ public class LoginResultController {
         this.serviceMySQL = serviceMySQL;
     }
 
+    @Audit(message = "chorobaListPage")
     @RequestMapping(value = "/admin/chorobaListPage.html", method = RequestMethod.GET)
     public ModelAndView getAdminWelcomePage(Principal principal) {
         String userName = principal.getName();
         User user = serviceMySQL.getUserByUserName(userName);
         ModelAndView model = new ModelAndView("adminWelcomePage");
         model.addObject("user", user);
+
         return model;
     }
 
+
+
+    @Audit(message = "chorobaListPage")
     @RequestMapping(value = "/user/chorobaListPage.html", method = RequestMethod.GET)
     public ModelAndView getUserWelcomePage(Principal principal) {
         String userName = principal.getName();
