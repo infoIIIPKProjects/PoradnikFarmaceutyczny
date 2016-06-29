@@ -7,7 +7,7 @@
         <!-- MS SQL Server-->
         <property name="connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
         <property name="connection.url">jdbc:jtds:sqlserver://localhost:1434/poradnik</property>
-        <property name="connection.username">root</property>
+        <property name="connection.username">rootMS</property>
         <property name="connection.password"></property>
 
         <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
