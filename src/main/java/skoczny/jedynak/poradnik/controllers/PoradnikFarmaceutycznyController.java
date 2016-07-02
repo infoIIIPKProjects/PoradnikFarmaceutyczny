@@ -131,7 +131,7 @@ public class PoradnikFarmaceutycznyController {
             model.addObject("error", "Cena nie jest liczbą");
         } else {
 
-            item.setLekName(nazwa);
+            item.setLekName(nazwa.replace("<", "&lt;").replace(">", "&gt;"));
             item.setCena(Double.valueOf(cena));
 
             if (dostepnosc.equals("tak")) {
@@ -167,7 +167,7 @@ public class PoradnikFarmaceutycznyController {
             model.addObject("choroba", service.listChoroba());
         } else {
             Lek item = new Lek();
-            item.setLekName(nazwa);
+            item.setLekName(nazwa.replace("<", "&lt;").replace(">", "&gt;"));
             item.setCena(Double.valueOf(cena));
 
             if (dostepnosc.equals("tak")) {
@@ -219,14 +219,14 @@ public class PoradnikFarmaceutycznyController {
 
     ) {
         Choroba item = new Choroba();
-        item.setNazwa(nazwa);
+        item.setNazwa(nazwa.replace("<", "&lt;").replace(">", "&gt;"));
 
         KategoriaChoroby kategoriaChoroby = service.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
         item.setKategoriaChoroby(kategoriaChoroby);
 
         Lek shop = service.getLekById(Integer.parseInt(lekId));
         item.setLek(shop);
-        item.setDescription(description);
+        item.setDescription(description.replace("<", "&lt;").replace(">", "&gt;"));
 
         service.addChorobaToDB(item);
         ModelAndView model = new ModelAndView("redirect:chorobaListPage.html");
@@ -243,7 +243,7 @@ public class PoradnikFarmaceutycznyController {
     ) {
 
         Choroba item = service.getChorobaID(Integer.parseInt(chorobaId));
-        item.setNazwa(nazwa);
+        item.setNazwa(nazwa.replace("<", "&lt;").replace(">", "&gt;"));
 
         KategoriaChoroby kategoriaChoroby = service.getKategoriaChorobyById(Integer.parseInt(kategoriaChorobyId));
         item.setKategoriaChoroby(kategoriaChoroby);
@@ -252,7 +252,7 @@ public class PoradnikFarmaceutycznyController {
 
         resolveNoDataChange(item, lek);
 
-        item.setDescription(description);
+        item.setDescription(description.replace("<", "&lt;").replace(">", "&gt;"));
 
         service.updateChorobaToDB(item);
 

@@ -46,6 +46,13 @@
     text-transform: uppercase;
 }
 
+td{
+    font-family: Capriola, Helvetica, sans-serif;
+}
+td.sorting_1 {
+    font-family: Capriola, Helvetica, sans-serif;
+}
+
 @font-face {
     font-family: 'doctor';
     src: url('/resources/static/fonts/Doctor.ttf');
