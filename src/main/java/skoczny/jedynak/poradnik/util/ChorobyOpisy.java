@@ -9,7 +9,7 @@ public class ChorobyOpisy {
     final static public String wzdecia = "objaw chorobowy zwiazany z obecnoscia nadmiernej ilosci gazow w jelitach.";
     final static public String marskosc = "postepujace wloknienie miazszu watroby, niszczace jej strukture.";
     final static public String kaszel = "reakcja odruchowa na podraznienie zakonczen nerwowych w blonie sluzowej gornych drog oddechowych.";
-    final static public String alergie = "patologiczna, jakosciowo zmieniona odpowiedz tkanek na oddzialywanie roznych obcych substancji zwanych alergenami, polegajaca na reakcji immunologicznej zwiazanej z powstaniem swoistych przeciwcial, ktore po zwiazaniu z antygenem doprowadzaja do uwolnienia roznych substancji mediatorow stanu zapalnego. ";
+    final static public String alergie = "jakosciowo zmieniona odpowiedz tkanek na oddzialywanie roznych obcych substancji zwanych alergenami, polegajaca na reakcji immunologicznej zwiazanej z powstaniem swoistych przeciwcial, ktore po zwiazaniu z antygenem doprowadzaja do uwolnienia roznych substancji mediatorow stanu zapalnego. ";
     final static public String problemyZoladkowe = "objaw chorobowy zwiazany z obecnoscia nadmiernej ilosci gazow w jelitach.";
     final static public String niedoTarczycy = "choroba ludzi i zwierzat spowodowana niedoborem hormonow tarczycy, prowadzacym do spowolnienia procesow metabolicznych.";
     final static public String bolOka = "Bol oczu moze sygnalizowac niegrozna dolegliwosc wywolana na przyklad przeciazeniem wzroku czy podraznieniem spojowek, ale takze moze oznaczac powazna chorobe oczu, taka jak jaskra lub zapalenie nerwu wzrokowego. Dlatego bolu oczu nigdy nie nalezy lekcewazyc.";
